@@ -1,0 +1,22 @@
+:root {
+  --background: #010101;
+  --background-surface: #111111;
+  --background-elevated: #1a1a1a;
+  --primary: #6b4a8c;
+  --primary-hover: #4e326f;
+  --primary-muted: #d3c9dd;
+  --accent: #5de4a8;
+  --accent-hover: #6cc197;
+  --accent-dark: #328055;
+  --foreground: #ffffff;
+  --foreground-muted: #999999;
+  --border: #1f1f1f;
+  --border-light: #2a2a2a;
+  --success: #5de4a8;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --radius: 0.5rem;
+  --font-heading: "Public Sans", system-ui, sans-serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+  --container: 80rem;
+}
