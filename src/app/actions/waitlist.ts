@@ -75,7 +75,7 @@ async function sendJoinEmail(email: string) {
       attachments: logo
         ? [
             {
-              filename: "logo-mindvault-white.png",
+              filename: "logo-mindvault-email.png",
               content: logo,
               contentType: "image/png",
               contentId: LOGO_CONTENT_ID,
@@ -91,7 +91,7 @@ async function sendJoinEmail(email: string) {
 
 async function readLogoPng(): Promise<Buffer | null> {
   try {
-    return await readFile(join(process.cwd(), "public/images/logo-mindvault-white.png"));
+    return await readFile(join(process.cwd(), "public/images/logo-mindvault-email.png"));
   } catch {
     return null;
   }
