@@ -9,7 +9,7 @@ export function captureServerEvent(
   if (!key) return;
 
   const client = new PostHog(key, {
-    host: process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://us.i.posthog.com",
+    host: process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://t.usemindvault.com",
   });
   client.capture({ distinctId, event, properties });
   void client.shutdown().catch(() => undefined);
