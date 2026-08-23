@@ -22,8 +22,10 @@ export function PostHogPageview() {
         posthog.init(key, {
           api_host: host,
           ui_host: uiHost,
+          defaults: "2026-05-30",
           capture_pageview: false,
           capture_pageleave: true,
+          capture_performance: { web_vitals: true, network_timing: false },
           autocapture: false,
           disable_session_recording: true,
           disable_surveys: true,
@@ -33,7 +35,11 @@ export function PostHogPageview() {
       });
     };
 
-    const t = window.setTimeout(boot, 2500);
+    if ("requestIdleCallback" in window) {
+      const idle = window.requestIdleCallback(boot, { timeout: 1500 });
+      return () => window.cancelIdleCallback(idle);
+    }
+    const t = window.setTimeout(boot, 800);
     return () => window.clearTimeout(t);
   }, []);
 
