@@ -7,7 +7,6 @@ const mindvaultPlans = [
     name: "Trial",
     price: "30 min",
     period: "",
-    who: "",
     blurb: "Put the hoop on. See if the stream is real.",
     intent: "trial" as PlanIntent,
     cta: "Download",
@@ -19,7 +18,6 @@ const mindvaultPlans = [
     name: "Plus",
     price: "$19",
     period: "/mo",
-    who: "",
     blurb: "Keep the session. Analyse it after.",
     intent: "plus" as PlanIntent,
     cta: "Get Plus",
@@ -31,8 +29,7 @@ const mindvaultPlans = [
     name: "Lab",
     price: "$49",
     period: "/mo",
-    who: "For the experiment",
-    blurb: "Pipe the stream live. Mark the events as they happen.",
+    blurb: "Pipe the stream into the experiment. Mark events as they happen.",
     intent: "lab" as PlanIntent,
     cta: "Get Lab",
     popular: true,
@@ -43,15 +40,16 @@ const mindvaultPlans = [
     name: "Research",
     price: "$99",
     period: "/mo",
-    who: "For the paper",
-    blurb: "Lab, plus notch and bandpass when the figure has to be clean.",
+    blurb: "Notch and bandpass the export when the figure has to be clean.",
     intent: "research" as PlanIntent,
     cta: "Get Research",
     popular: false,
     ghost: false,
-    features: ["Everything in Lab", "Notch and bandpass", "Cleaner trace for export"],
+    features: ["Everything in Lab", "Notch and bandpass", "Cleaner trace for the figure"],
   },
 ] as const;
+
+const montage = ["TP9", "AF7", "AF8", "TP10"] as const;
 
 function planCardClass(plan: { ghost: boolean }) {
   if (plan.ghost) {
@@ -67,9 +65,6 @@ function PlanBody({ plan }: { plan: (typeof mindvaultPlans)[number] }) {
         {plan.name}
         {plan.popular ? <span className="sr-only">, recommended</span> : null}
       </h3>
-      <p className="mt-1 min-h-[1.25rem] text-[13px] font-medium tracking-wide text-white/55">
-        {plan.who || "\u00a0"}
-      </p>
       <div className="mt-5 flex items-baseline gap-1">
         <span className="text-4xl font-medium tracking-tight text-white">{plan.price}</span>
         {plan.period ? <span className="text-sm text-white/55">{plan.period}</span> : null}
@@ -109,7 +104,6 @@ export function Pricing() {
             <p className="mt-4 text-lg text-white/50">
               Connect Muse and watch the live view. Analysis, live-out, and filters sit on a plan.
             </p>
-            <p className="mt-3 text-sm text-white/55">Built for researchers and practitioners.</p>
           </div>
         </div>
 
@@ -124,9 +118,30 @@ export function Pricing() {
             </div>
           ))}
         </div>
-        <p className="mt-8 text-[13px] text-white/55" data-mv-reveal>
-          <span data-mv-fade>All plans: TP9 AF7 AF8 TP10 · 256 Hz</span>
-        </p>
+
+        <div className="mt-10 border-t border-white/10 pt-8 sm:mt-12" data-mv-reveal>
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-0 sm:divide-x sm:divide-white/10">
+            <div data-mv-fade className="sm:pr-10">
+              <p className={sectionKicker}>Who it&apos;s for</p>
+              <p className="mt-3 text-[15px] leading-relaxed text-white">Researchers and practitioners.</p>
+              <p className="mt-1.5 text-[15px] leading-relaxed text-white/55">
+                The experiment, the paper, or the desk in between.
+              </p>
+            </div>
+            <div data-mv-fade className="sm:pl-10">
+              <p className={sectionKicker}>On every plan</p>
+              <p className="mt-3 flex flex-wrap items-center gap-x-3 text-[15px] font-medium tracking-wide text-white">
+                {montage.map((ch, i) => (
+                  <span key={ch} className="flex items-center gap-x-3">
+                    {i > 0 ? <span className="h-3 w-px bg-white/10" aria-hidden="true" /> : null}
+                    {ch}
+                  </span>
+                ))}
+              </p>
+              <p className="mt-1.5 text-[15px] tabular-nums text-white/55">256 Hz EEG</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

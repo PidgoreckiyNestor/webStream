@@ -20,7 +20,7 @@ ${PRODUCT_DEFINITION}
 - Trial: 30 minutes live
 - Plus: $19/mo — unlimited live, local recording, replay
 - Lab: $49/mo — LSL, OSC, HTTP API, event markers
-- Research: $99/mo — Lab plus notch and bandpass for a cleaner trace
+- Research: $99/mo — notch and bandpass when the figure has to be clean
 
 ## FAQ
 ${faq}
