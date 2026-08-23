@@ -21,7 +21,7 @@ export const faqItems = [
   },
   {
     q: "Can I export Muse EEG to CSV or EDF for Python, MNE, or EEGLAB?",
-    a: "Yes. Plus records locally and exports CSV (Python, NumPy, Jupyter) or EDF (MNE, EEGLAB). Lab is the live pipe instead of a file: LSL into Python or MATLAB, OSC into Unity. Trial is 30 minutes live to see the stream first.",
+    a: "Yes. Plus records locally and exports CSV (Python, NumPy, Jupyter) or EDF (MNE, EEGLAB). Lab is the live pipe instead of a file: LSL into Python or MATLAB, OSC into Unity. Free is 30 minutes live to see the stream first.",
   },
   {
     q: "How is MindVault different from the Muse app?",
@@ -29,7 +29,7 @@ export const faqItems = [
   },
   {
     q: "Can I download MindVault for Windows now?",
-    a: "Not as a public installer yet. Lab beta is a waitlist: pick a plan, leave an email, we write when Windows, macOS, and Linux builds open. Trial is 30 minutes live. Plus is $19/month. Lab is $49/month. Research is $99/month. One note — not a newsletter.",
+    a: "Not as a public installer yet. Lab beta is a waitlist: pick a plan, leave an email, we write when Windows, macOS, and Linux builds open. Free is 30 minutes live. Plus is $19/month. Lab is $49/month. Research is $99/month. One note — not a newsletter.",
   },
   {
     q: "Do I need BlueMuse or a BLED112 dongle to stream Muse EEG on Windows?",

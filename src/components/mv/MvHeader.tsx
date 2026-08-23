@@ -67,7 +67,7 @@ export function MvHeader() {
             Contact
           </button>
           <InPageAnchor targetId="pricing" className={btnSolid}>
-            Download
+            Pick a plan
           </InPageAnchor>
         </div>
       </nav>
@@ -96,7 +96,7 @@ export function MvHeader() {
                 Contact
               </button>
               <InPageAnchor targetId="pricing" className={`${btnSolid} flex-1`} onClick={() => closeMenu()}>
-                Download
+                Pick a plan
               </InPageAnchor>
             </div>
           </div>

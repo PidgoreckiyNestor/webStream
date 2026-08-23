@@ -2,7 +2,7 @@
 
 Desktop app for Muse 2, Muse S, and Muse S Athena. EEG at 256 Hz (TP9, AF7, AF8, TP10), PPG, IMU. Windows, macOS, Linux.
 
-## Trial
+## Free
 - Price: $0
 - Limits: 30 minutes live
 - Features: contact quality, bands on the live view

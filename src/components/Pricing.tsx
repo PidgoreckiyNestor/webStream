@@ -4,12 +4,12 @@ import type { PlanIntent } from "@/lib/waitlist";
 
 const mindvaultPlans = [
   {
-    name: "Trial",
+    name: "Free",
     price: "30 min",
     period: "",
     blurb: "Put the hoop on. See if the stream is real.",
     intent: "trial" as PlanIntent,
-    cta: "Download",
+    cta: "Get Free",
     popular: false,
     ghost: true,
     features: ["30 minutes live", "Contact quality", "Bands on the live view"],

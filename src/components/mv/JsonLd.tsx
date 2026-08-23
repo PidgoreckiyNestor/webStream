@@ -28,7 +28,7 @@ export function JsonLd() {
         offers: [
           {
             "@type": "Offer",
-            name: "Trial",
+            name: "Free",
             price: "0",
             priceCurrency: "USD",
             description: "30 minutes live",
