@@ -103,6 +103,7 @@ function WaitlistModal({ opts, onClose }: { opts: OpenOpts; onClose: () => void 
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
+    if (pending || done) return;
     setPending(true);
     setError(null);
     const result = await joinWaitlist({

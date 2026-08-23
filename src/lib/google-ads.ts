@@ -21,24 +21,22 @@ declare global {
   }
 }
 
+function gtag(...args: unknown[]) {
+  window.dataLayer = window.dataLayer || [];
+  if (typeof window.gtag === "function") {
+    window.gtag(...args);
+    return;
+  }
+  window.dataLayer.push(args);
+}
+
 export function fireWaitlistConversion() {
   if (typeof window === "undefined") return;
   const id = GOOGLE_ADS_ID;
   if (!isGoogleAdsId(id)) return;
 
-  const send = () => {
-    if (typeof window.gtag !== "function") return;
-    window.gtag("event", "sign_up", { method: "waitlist" });
-    if (isGoogleAdsConversionLabel(GOOGLE_ADS_CONVERSION_LABEL)) {
-      window.gtag("event", "conversion", {
-        send_to: `${id}/${GOOGLE_ADS_CONVERSION_LABEL}`,
-      });
-    }
-  };
-
-  if (typeof window.gtag === "function") {
-    send();
-    return;
+  gtag("event", "sign_up", { method: "waitlist" });
+  if (isGoogleAdsConversionLabel(GOOGLE_ADS_CONVERSION_LABEL)) {
+    gtag("event", "conversion", { send_to: `${id}/${GOOGLE_ADS_CONVERSION_LABEL}` });
   }
-  window.setTimeout(send, 400);
 }
