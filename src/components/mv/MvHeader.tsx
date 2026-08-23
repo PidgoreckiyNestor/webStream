@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { btnGhost, btnSolid, navText } from "@/components/mv/chrome";
 import { InPageAnchor } from "@/components/mv/InPageAnchor";
-import { WaitlistOpen } from "@/components/mv/Waitlist";
 
 const mobileNavLink =
   "flex items-center rounded-md px-3 py-2.5 text-sm font-medium text-white/80 hover:bg-white/[0.06] hover:text-white cursor-pointer";
@@ -64,9 +63,9 @@ export function MvHeader() {
           <button type="button" className={btnGhost}>
             Contact
           </button>
-          <WaitlistOpen intent="lab" className={btnSolid}>
+          <InPageAnchor targetId="pricing" className={btnSolid}>
             Download
-          </WaitlistOpen>
+          </InPageAnchor>
         </div>
       </nav>
 
@@ -89,9 +88,9 @@ export function MvHeader() {
               <button type="button" className={`${btnGhost} flex-1`}>
                 Contact
               </button>
-              <WaitlistOpen intent="lab" className={`${btnSolid} flex-1`} onClick={() => closeMenu()}>
+              <InPageAnchor targetId="pricing" className={`${btnSolid} flex-1`} onClick={() => closeMenu()}>
                 Download
-              </WaitlistOpen>
+              </InPageAnchor>
             </div>
           </div>
         </div>
