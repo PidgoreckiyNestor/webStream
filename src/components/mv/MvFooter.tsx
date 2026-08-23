@@ -6,17 +6,6 @@ const footerLink =
 
 const footerHeading = "text-[13px] font-medium text-white";
 
-function ExternalMark() {
-  return (
-    <svg viewBox="0 0 12 12" className="h-3 w-3" aria-hidden="true">
-      <path
-        fill="currentColor"
-        d="M3.5 3h5.09L3.2 8.39l.71.71L9.3 3.71V9h1V2H3.5v1z"
-      />
-    </svg>
-  );
-}
-
 function CompactColumns() {
   return (
     <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
@@ -64,11 +53,9 @@ function CompactColumns() {
         <h3 className={footerHeading}>Resources</h3>
         <ul role="list" className="mt-4 space-y-3">
           <li>
-            <button type="button" className={`${footerLink} inline-flex items-center gap-1`}>
-              Documentation
-              <ExternalMark />
-              <span className="sr-only"> (opens in new tab)</span>
-            </button>
+            <Link href="/articles" className={footerLink}>
+              Guides
+            </Link>
           </li>
         </ul>
       </div>
