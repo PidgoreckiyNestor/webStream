@@ -12,13 +12,13 @@ ${PRODUCT_DEFINITION}
 
 ## Pages
 - [Home](${base}): product, how it works, plans, FAQ
-- [Plans](${base}/#pricing): Free, Plus, Lab, Research
+- [Plans](${base}/#pricing): Free, Base, Lab, Research
 - [FAQ](${base}/#faq): headsets, LSL/OSC, Muse app, download
 - [Pricing (machine-readable)](${base}/pricing.md)
 
 ## Plans
 - Free: 30 minutes live
-- Plus: $19/mo — unlimited live, local recording, replay
+- Base: $19/mo — unlimited live, local recording, replay
 - Lab: $49/mo — LSL, OSC, HTTP API, event markers
 - Research: $99/mo — notch and bandpass when the figure has to be clean
 

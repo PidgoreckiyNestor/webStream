@@ -37,7 +37,7 @@ export function JsonLd() {
           },
           {
             "@type": "Offer",
-            name: "Plus",
+            name: "Base",
             price: "19",
             priceCurrency: "USD",
             description: "Unlimited live, local recording, CSV and EDF export",

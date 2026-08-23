@@ -7,14 +7,14 @@ Desktop app for Muse 2, Muse S, and Muse S Athena. EEG at 256 Hz (TP9, AF7, AF8,
 - Limits: 30 minutes live
 - Features: contact quality, bands on the live view
 
-## Plus
+## Base
 - Price: $19/month
 - Features: unlimited live, local recording, CSV and EDF export
 
 ## Lab
 - Price: $49/month
 - Job: pipe the stream into the experiment; mark events as they happen
-- Features: everything in Plus, LSL, OSC, HTTP API, event markers
+- Features: everything in Base, LSL, OSC, HTTP API, event markers
 
 ## Research
 - Price: $99/month

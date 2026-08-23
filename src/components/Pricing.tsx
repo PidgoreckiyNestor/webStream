@@ -15,12 +15,12 @@ const mindvaultPlans = [
     features: ["30 minutes live", "Contact quality", "Bands on the live view"],
   },
   {
-    name: "Plus",
+    name: "Base",
     price: "$19",
     period: "/mo",
     blurb: "Keep the session. Analyse it after.",
     intent: "plus" as PlanIntent,
-    cta: "Get Plus",
+    cta: "Get Base",
     popular: false,
     ghost: false,
     features: ["Unlimited live", "Local recording", "CSV and EDF export"],
@@ -34,7 +34,7 @@ const mindvaultPlans = [
     cta: "Get Lab",
     popular: true,
     ghost: false,
-    features: ["Everything in Plus", "LSL and OSC", "HTTP API", "Event markers"],
+    features: ["Everything in Base", "LSL and OSC", "HTTP API", "Event markers"],
   },
   {
     name: "Research",
