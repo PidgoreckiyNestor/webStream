@@ -102,9 +102,6 @@ export function fireWaitlistConversion() {
   const id = GOOGLE_ADS_ID;
   if (!isGoogleAdsId(id)) return;
 
-  captureGoogleAdsClick();
-  if (!readGoogleAdsClick()) return;
-
   gtag("event", "sign_up", { method: "waitlist" });
   if (isGoogleAdsConversionLabel(GOOGLE_ADS_CONVERSION_LABEL)) {
     gtag("event", "conversion", { send_to: `${id}/${GOOGLE_ADS_CONVERSION_LABEL}` });
