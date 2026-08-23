@@ -12,7 +12,7 @@ const SLIDES = [
 const frame =
   "overflow-hidden rounded-2xl border border-white/10 bg-[#090817] shadow-2xl ring-1 ring-white/5";
 
-const imageSizes = "(min-width: 1024px) 640px, (min-width: 640px) 70vw, calc(100vw - 2rem)";
+const imageSizes = "(min-width: 1024px) 640px, (min-width: 640px) 70vw, 380px";
 
 export function ProductCarousel() {
   const [index, setIndex] = useState(0);
@@ -20,10 +20,16 @@ export function ProductCarousel() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
-    const id = window.setInterval(() => {
-      setIndex((current) => (current + 1) % SLIDES.length);
-    }, 4500);
-    return () => window.clearInterval(id);
+    let interval = 0;
+    const start = window.setTimeout(() => {
+      interval = window.setInterval(() => {
+        setIndex((current) => (current + 1) % SLIDES.length);
+      }, 4500);
+    }, 8000);
+    return () => {
+      window.clearTimeout(start);
+      window.clearInterval(interval);
+    };
   }, []);
 
   const stackStep = 16;

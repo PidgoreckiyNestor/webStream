@@ -53,7 +53,7 @@ export function HowItWorks() {
                   alt={step.alt}
                   fill
                   className="object-contain"
-                  sizes="(min-width: 768px) 28vw, calc(100vw - 2rem)"
+                  sizes="(min-width: 768px) 28vw, 292px"
                   quality={70}
                 />
               </div>
