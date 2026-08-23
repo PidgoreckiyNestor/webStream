@@ -13,10 +13,12 @@ Desktop app for Muse 2, Muse S, and Muse S Athena. EEG at 256 Hz (TP9, AF7, AF8,
 
 ## Lab
 - Price: $49/month
+- For: the experiment
 - Features: everything in Plus, LSL, OSC, HTTP API, event markers
 
 ## Research
 - Price: $99/month
-- Features: everything in Lab, signal filters
+- For: the paper
+- Features: everything in Lab, notch and bandpass, cleaner trace for export
 
 Lab beta is a waitlist. Public installers are not live yet.

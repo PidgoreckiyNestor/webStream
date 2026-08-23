@@ -58,7 +58,7 @@ export function JsonLd() {
             name: "Research",
             price: "99",
             priceCurrency: "USD",
-            description: "Signal filters",
+            description: "Notch and bandpass on top of Lab",
             url: `${base}/#pricing`,
             availability: "https://schema.org/PreOrder",
           },
