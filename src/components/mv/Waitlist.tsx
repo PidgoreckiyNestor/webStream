@@ -107,27 +107,32 @@ function WaitlistModal({ opts, onClose }: { opts: OpenOpts; onClose: () => void 
     if (pending || done) return;
     setPending(true);
     setError(null);
-    const result = await joinWaitlist({
-      email,
-      role,
-      planIntent: opts.intent && PLAN_INTENTS.includes(opts.intent) ? opts.intent : "lab",
-      os: opts.os,
-      honeypot,
-      ...readUtms(),
-    });
-    setPending(false);
-    if (!result.ok) {
-      setError(
-        result.error === "not_configured"
-          ? "Waitlist isn’t wired yet."
-          : result.error === "invalid"
-            ? "That email doesn’t look right."
-            : "Couldn’t join. Try again.",
-      );
-      return;
+    try {
+      const result = await joinWaitlist({
+        email,
+        role,
+        planIntent: opts.intent && PLAN_INTENTS.includes(opts.intent) ? opts.intent : "lab",
+        os: opts.os,
+        honeypot,
+        ...readUtms(),
+      });
+      if (!result.ok) {
+        setError(
+          result.error === "not_configured"
+            ? "Waitlist isn’t wired yet."
+            : result.error === "invalid"
+              ? "That email doesn’t look right."
+              : "Couldn’t join. Try again.",
+        );
+        return;
+      }
+      setDone(true);
+      if (!honeypot && !result.duplicate) fireWaitlistConversion();
+    } catch {
+      setError("Couldn’t join. Try again.");
+    } finally {
+      setPending(false);
     }
-    setDone(true);
-    if (!honeypot && !result.duplicate) fireWaitlistConversion();
   }
 
   return (

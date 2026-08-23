@@ -12,5 +12,5 @@ export function captureServerEvent(
     host: process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://us.i.posthog.com",
   });
   client.capture({ distinctId, event, properties });
-  void client.shutdown();
+  void client.shutdown().catch(() => undefined);
 }
