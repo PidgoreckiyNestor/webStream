@@ -5,7 +5,7 @@ const steps = [
   {
     n: "01",
     title: "Connect Muse",
-    body: "Pair Muse 2, Muse S, or Muse S Athena over Bluetooth. No extra hardware.",
+    body: "Pair Muse S Athena directly over Bluetooth. Muse 2 and Muse S are in compatibility rollout.",
     shot: "/images/shot-connect-3.png",
     alt: "Muse S found over Bluetooth, ready to connect",
   },
@@ -19,7 +19,7 @@ const steps = [
   {
     n: "03",
     title: "Analyse data",
-    body: "Band power, spectrogram, then CSV or EDF — or LSL on Lab.",
+    body: "Band power and spectrogram, then CSV or EDF. LSL and OSC are coming next in Lab.",
     shot: "/images/shot-analyse.png",
     alt: "Spectrogram and band stream analysis",
   },

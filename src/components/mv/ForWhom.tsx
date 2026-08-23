@@ -5,7 +5,7 @@ const roles = [
   },
   {
     title: "Build",
-    body: "LSL or OSC into your stack, or a CSV into Python, MATLAB, Unity.",
+    body: "CSV into Python today. LSL and OSC integrations are coming next in Lab.",
   },
   {
     title: "Teach",

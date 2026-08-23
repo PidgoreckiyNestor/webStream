@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
-import { StubPage } from "@/components/StubPage";
+import { redirectToPricing } from "@/lib/redirect-to-pricing";
 
-export const metadata: Metadata = { robots: { index: false, follow: false } };
-
-export default function SignupPage() {
-  return <StubPage title="Get Started" />;
+export default async function SignupPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  redirectToPricing(await searchParams);
 }

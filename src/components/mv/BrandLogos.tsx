@@ -23,7 +23,7 @@ export function BrandLogos() {
             Drops into the stack you already use
           </h2>
           <p className="mt-4 text-lg text-white/50">
-            CSV, LSL, and OSC — then Python, Unity, Arduino, or whatever is downstream.
+            CSV into Python today. LSL and OSC integrations are coming next in Lab.
           </p>
         </div>
 

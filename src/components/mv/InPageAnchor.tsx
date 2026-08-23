@@ -2,6 +2,10 @@
 
 import type { MouseEvent, ReactNode } from "react";
 
+function homeHash(targetId: string, search = ""): string {
+  return `${search ? `/${search}` : "/"}#${targetId}`;
+}
+
 export function InPageAnchor({
   targetId,
   href,
@@ -21,12 +25,16 @@ export function InPageAnchor({
       event.preventDefault();
       el.scrollIntoView({ behavior: "smooth", block: "start" });
       history.replaceState(null, "", `${window.location.search}#${targetId}`);
+      onClick?.();
+      return;
     }
+    event.preventDefault();
     onClick?.();
+    window.location.assign(homeHash(targetId, window.location.search));
   }
 
   return (
-    <a href={href ?? `#${targetId}`} className={className} onClick={handleClick}>
+    <a href={href ?? homeHash(targetId)} className={className} onClick={handleClick}>
       {children}
     </a>
   );

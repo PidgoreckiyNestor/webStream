@@ -1,3 +1,5 @@
+import { getAccessRequestCopy, type PlanIntent } from "@/lib/waitlist";
+
 export type EmailContent = {
   subject: string;
   text: string;
@@ -14,23 +16,25 @@ const NAVY = "#06070a";
 const INK = "#111111";
 const MUTED = "#6b7280";
 
-const SUBJECT = "You're on the MindVault Lab beta list";
-
-const TEXT = [
-  "You're on the Lab beta list",
-  "",
-  "LSL, OSC, API, and markers on the desk.",
-  "",
-  "We'll write when it opens.",
-  "",
-  "— MindVault",
-  "",
-  "One note. Not a newsletter.",
-].join("\n");
-
 export const LOGO_CONTENT_ID = "logo";
 
-export function labBetaJoinEmail(logoSrc = `cid:${LOGO_CONTENT_ID}`): EmailContent {
+export function labBetaJoinEmail(
+  planIntent: PlanIntent | null = null,
+  logoSrc = `cid:${LOGO_CONTENT_ID}`,
+): EmailContent {
+  const copy = getAccessRequestCopy(planIntent);
+  const subject = `MindVault — ${copy.successTitle}`;
+  const text = [
+    copy.successTitle,
+    "",
+    copy.emailDetail,
+    "",
+    copy.successBody,
+    "",
+    "— MindVault",
+    "",
+    "One note. Not a newsletter.",
+  ].join("\n");
   const logo = `<img src="${logoSrc}" alt="MindVault" width="560" height="70" style="display:block;width:100%;max-width:560px;height:auto;border:0;outline:none;text-decoration:none;" />`;
 
   const html = `<!DOCTYPE html>
@@ -40,7 +44,7 @@ export function labBetaJoinEmail(logoSrc = `cid:${LOGO_CONTENT_ID}`): EmailConte
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light only" />
   <meta name="supported-color-schemes" content="light only" />
-  <title>${SUBJECT}</title>
+  <title>${subject}</title>
   <!--[if mso]>
   <noscript>
     <xml>
@@ -81,7 +85,7 @@ export function labBetaJoinEmail(logoSrc = `cid:${LOGO_CONTENT_ID}`): EmailConte
 </head>
 <body class="canvas" style="margin:0;padding:0;background-color:${CANVAS};background-image:linear-gradient(${CANVAS},${CANVAS});font-family:${FONT};">
   <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">
-    LSL, OSC, API, and markers on the desk. We'll write when it opens.
+    ${copy.emailDetail}
   </div>
   <table role="presentation" class="canvas" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${CANVAS}" style="background-color:${CANVAS};background-image:linear-gradient(${CANVAS},${CANVAS});">
     <tr>
@@ -98,13 +102,13 @@ export function labBetaJoinEmail(logoSrc = `cid:${LOGO_CONTENT_ID}`): EmailConte
                 <tr>
                   <td class="card" style="padding:36px 36px 40px;font-family:${FONT};background-color:${CARD};background-image:linear-gradient(${CARD},${CARD});">
                     <p class="ink" style="margin:0;font-family:${FONT};font-size:26px;line-height:1.25;font-weight:700;letter-spacing:-0.03em;color:${INK};">
-                      You're on the Lab beta list
+                      ${copy.successTitle}
                     </p>
                     <p class="muted" style="margin:20px 0 0;font-family:${FONT};font-size:16px;line-height:1.65;font-weight:400;color:${MUTED};">
-                      LSL, OSC, API, and markers on the desk.
+                      ${copy.emailDetail}
                     </p>
                     <p class="muted" style="margin:20px 0 0;font-family:${FONT};font-size:16px;line-height:1.65;font-weight:400;color:${MUTED};">
-                      We'll write when it opens.
+                      ${copy.successBody}
                     </p>
                     <p class="ink" style="margin:28px 0 0;font-family:${FONT};font-size:15px;line-height:1.5;font-weight:400;color:${INK};">
                       — MindVault
@@ -126,5 +130,5 @@ export function labBetaJoinEmail(logoSrc = `cid:${LOGO_CONTENT_ID}`): EmailConte
 </body>
 </html>`;
 
-  return { subject: SUBJECT, text: TEXT, html };
+  return { subject, text, html };
 }

@@ -14,7 +14,7 @@ export function JsonLd() {
         url: base,
         logo: `${base}/icon.png`,
         description:
-          "Desktop app for Muse 2, Muse S, and Muse S Athena. Live EEG, local recording, LSL, OSC, and CSV. Not a notes app, RAG tool, or supplement brand.",
+          "Athena-first desktop app for live 256 Hz EEG, contact quality, CSV recording, and EDF export. Available through controlled early access.",
       },
       {
         "@type": "SoftwareApplication",
@@ -33,7 +33,7 @@ export function JsonLd() {
             priceCurrency: "USD",
             description: "30 minutes live",
             url: `${base}/#pricing`,
-            availability: "https://schema.org/PreOrder",
+            availability: "https://schema.org/LimitedAvailability",
           },
           {
             "@type": "Offer",
@@ -42,14 +42,14 @@ export function JsonLd() {
             priceCurrency: "USD",
             description: "Unlimited live, local recording, CSV and EDF export",
             url: `${base}/#pricing`,
-            availability: "https://schema.org/PreOrder",
+            availability: "https://schema.org/LimitedAvailability",
           },
           {
             "@type": "Offer",
             name: "Lab",
             price: "49",
             priceCurrency: "USD",
-            description: "LSL, OSC, HTTP API, event markers",
+            description: "LSL, OSC, HTTP API, and event markers are coming next in Lab",
             url: `${base}/#pricing`,
             availability: "https://schema.org/PreOrder",
           },
@@ -58,7 +58,7 @@ export function JsonLd() {
             name: "Research",
             price: "99",
             priceCurrency: "USD",
-            description: "Adjustable notch and bandpass, raw and filtered export, filter recipe in the file",
+            description: "The research roadmap includes adjustable notch and bandpass, raw and filtered export, and the filter recipe in the file",
             url: `${base}/#pricing`,
             availability: "https://schema.org/PreOrder",
           },

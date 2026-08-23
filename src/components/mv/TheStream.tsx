@@ -12,13 +12,13 @@ const lines = [
 const vsCols = ["Muse app", "Mind Monitor", "BlueMuse", "MindVault"] as const;
 
 const vsRows = [
-  { k: "Runs on", cells: ["Phone", "Phone", "Windows", "Windows, macOS, Linux"] },
+  { k: "Runs on", cells: ["Phone", "Phone", "Windows", "Windows, macOS, Linux rollout"] },
   { k: "Job", cells: ["Meditation scores", "Graphs + OSC", "LSL bridge", "Live EEG on a desk"] },
   { k: "Phone in the loop", cells: ["Yes", "Yes", "No", "No"] },
-  { k: "Out", cells: ["App metrics", "CSV, OSC", "LSL", "CSV, EDF · LSL, OSC (Lab)"] },
+  { k: "Out", cells: ["App metrics", "CSV, OSC", "LSL", "CSV, EDF now · LSL, OSC (Lab)"] },
   { k: "EEG rate", cells: ["Hidden", "256 Hz if Constant", "256 Hz", "256 Hz"] },
-  { k: "Athena", cells: ["Meditation", "Yes", "Experimental", "Yes"] },
-  { k: "macOS / Linux", cells: ["—", "—", "No", "Yes"] },
+  { k: "Athena", cells: ["Meditation", "Yes", "Experimental", "Current release"] },
+  { k: "macOS / Linux", cells: ["—", "—", "No", "Early-access rollout"] },
 ] as const;
 
 function CompareTable() {
@@ -73,7 +73,7 @@ function CompareTable() {
       </div>
       <p className="mt-4 max-w-3xl text-[13px] text-white/55" data-mv-fade>
         MindVault does not replace Muse meditation or Mind Monitor on a phone. It puts the hoop on a
-        desk — no BlueMuse, no dongle. LSL and OSC ship on Lab.
+        desk — no BlueMuse, no dongle. CSV and EDF are in the current Athena release; LSL and OSC are coming next in Lab.
       </p>
     </div>
   );
@@ -87,11 +87,10 @@ export function TheStream() {
           <div data-mv-fade>
             <p className={sectionKicker}>On the wire</p>
             <h2 className="mt-4 text-4xl font-medium tracking-tight text-white sm:text-5xl">
-              The whole stream, on a desk.
+              The Muse stream, on a desk.
             </h2>
             <p className="mt-4 text-lg text-white/50">
-              Muse already measures this. The phone app keeps most of it. We put every channel on the computer,
-              on one clock.
+              The signal map — from sample timing to desktop output — in one view.
             </p>
           </div>
         </div>
@@ -104,21 +103,28 @@ export function TheStream() {
             <ElectrodeArc />
           </div>
 
-          <dl className="divide-y divide-white/10" data-mv-fade>
-            {lines.map((line) => (
-              <div key={line.label} className="flex items-baseline justify-between gap-6 py-5 first:pt-0 last:pb-0">
-                <dt className="text-sm text-white/50">{line.label}</dt>
-                <dd className="shrink-0 font-medium tabular-nums tracking-tight text-white">
-                  <span className="text-3xl sm:text-4xl">{line.kHz}</span>
-                  <span className="ml-1.5 text-sm text-white/55">{line.unit}</span>
-                </dd>
+          <div data-mv-fade>
+            <dl className="divide-y divide-white/10">
+              {lines.map((line) => (
+                <div key={line.label} className="flex items-baseline justify-between gap-6 py-5 first:pt-0 last:pb-0">
+                  <dt className="text-sm text-white/50">{line.label}</dt>
+                  <dd className="shrink-0 font-medium tabular-nums tracking-tight text-white">
+                    <span className="text-3xl sm:text-4xl">{line.kHz}</span>
+                    <span className="ml-1.5 text-sm text-white/55">{line.unit}</span>
+                  </dd>
+                </div>
+              ))}
+              <div className="flex items-baseline justify-between gap-6 py-5">
+                <dt className="text-sm text-white/50">Leave as a file, or stay live</dt>
+                <dd className="shrink-0 text-sm font-medium text-white">CSV · EDF · LSL · OSC</dd>
               </div>
-            ))}
-            <div className="flex items-baseline justify-between gap-6 py-5">
-              <dt className="text-sm text-white/50">Leave as a file, or stay live</dt>
-              <dd className="shrink-0 text-sm font-medium text-white">CSV · EDF · LSL · OSC</dd>
-            </div>
-          </dl>
+            </dl>
+            <p className="mt-4 text-[13px] leading-relaxed text-white/45">
+              EEG, CSV, and EDF are available in the current Athena release. Muse 2/S PPG and motion
+              remain part of the compatibility and export rollout. LSL and OSC are coming next in Lab.
+              1 ms refers to timestamp precision, not sensor rate.
+            </p>
+          </div>
         </div>
 
         <ForWhom />

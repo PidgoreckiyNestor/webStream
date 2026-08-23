@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { sectionKicker } from "@/components/mv/chrome";
 import { faqItems } from "@/lib/faq";
 
@@ -41,7 +42,7 @@ export function Faq() {
                 Before you pick a plan.
               </h2>
               <p className="mt-4 text-lg text-white/50">
-                Headset, stream, Lab. Then an email — not a download.
+                Current Athena workflow first. More joins the same session with Lab.
               </p>
             </div>
           </div>
@@ -63,12 +64,29 @@ export function Faq() {
                     </button>
                   </h3>
                   <div
+                    aria-hidden={!isOpen}
+                    inert={!isOpen}
                     className={`grid motion-reduce:transition-none ${
                       isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
                     } transition-[grid-template-rows] duration-300 ease-out`}
                   >
                     <div className="overflow-hidden">
-                      <p className="pb-5 max-w-xl text-[15px] leading-relaxed text-white/55">{item.a}</p>
+                      <p className="pb-5 max-w-xl text-[15px] leading-relaxed text-white/55">
+                        {item.a}
+                        {item.guide ? (
+                          <>
+                            {" "}
+                            <Link
+                              href={item.guide.href}
+                              tabIndex={isOpen ? undefined : -1}
+                              className="text-white/90 hover:text-white"
+                            >
+                              {item.guide.label}
+                            </Link>
+                            .
+                          </>
+                        ) : null}
+                      </p>
                     </div>
                   </div>
                 </div>

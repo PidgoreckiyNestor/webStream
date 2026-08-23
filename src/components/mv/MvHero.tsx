@@ -9,7 +9,18 @@ function heroIndex(i: number): CSSProperties {
 
 const proof = ["Live stream", "Local recording", "Ready to export"];
 
-const streamSpec = ["TP9", "AF7", "AF8", "TP10", "256 Hz", "PPG", "IMU", "CSV", "EDF", "LSL", "OSC"];
+const streamSpec = [
+  "TP9",
+  "AF7",
+  "AF8",
+  "TP10",
+  "256 Hz",
+  "Contact quality",
+  "CSV",
+  "EDF",
+  "LSL · Lab",
+  "OSC · Lab",
+];
 
 function NameMarquee() {
   return (
@@ -64,7 +75,7 @@ export function MvHero() {
             style={heroIndex(0)}
             className="text-sm font-medium tracking-wide text-primary-muted"
           >
-            Desktop app for Muse 2, Muse S, and Muse S Athena
+            Athena-first desktop app · controlled early-access rollout
           </p>
           <h1
             data-mv-hero

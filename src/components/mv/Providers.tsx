@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { Suspense, type ReactNode } from "react";
 import { GoogleAdsClickCapture } from "@/components/mv/GoogleAdsClickCapture";
+import { HashScroll } from "@/components/mv/HashScroll";
 import { WaitlistProvider } from "@/components/mv/Waitlist";
 
 const PostHogPageview = dynamic(
@@ -14,6 +15,7 @@ export function Providers({ children }: { children: ReactNode }) {
   return (
     <WaitlistProvider>
       <GoogleAdsClickCapture />
+      <HashScroll />
       <Suspense fallback={null}>
         <PostHogPageview />
       </Suspense>

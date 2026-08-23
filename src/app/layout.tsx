@@ -11,9 +11,9 @@ const geist = Geist({
   display: "swap",
 });
 
-const title = "MindVault — Muse EEG on your computer, LSL or CSV";
+const title = "MindVault — Muse S Athena EEG on your computer";
 const description =
-  "Desktop app for Muse 2, Muse S, and Muse S Athena. Stream 256 Hz EEG on your computer — record locally, export CSV, or pipe LSL. Windows, macOS, Linux. No phone.";
+  "Athena-first desktop app for live 256 Hz EEG, contact quality, CSV recording, and EDF export. Controlled access across Windows, macOS, and Linux. LSL is coming next in Lab.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),

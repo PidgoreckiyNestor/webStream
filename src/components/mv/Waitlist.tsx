@@ -12,9 +12,18 @@ import {
 import { joinWaitlist } from "@/app/actions/waitlist";
 import { btnGhost, btnSolid } from "@/components/mv/chrome";
 import { fireWaitlistConversion, readGoogleAdsClick } from "@/lib/google-ads";
-import { PLAN_INTENTS, ROLES, type PlanIntent, type Role } from "@/lib/waitlist";
+import {
+  getAccessRequestCopy,
+  normalizeOperatingSystem,
+  normalizePlanIntent,
+  OPERATING_SYSTEMS,
+  ROLES,
+  type OperatingSystem,
+  type PlanIntent,
+  type Role,
+} from "@/lib/waitlist";
 
-type OpenOpts = { intent?: PlanIntent | null; os?: string | null };
+type OpenOpts = { intent?: PlanIntent | null; os?: OperatingSystem | null };
 
 type WaitlistContextValue = {
   open: (opts?: OpenOpts) => void;
@@ -47,7 +56,7 @@ export function WaitlistOpen({
   onClick,
 }: {
   intent?: PlanIntent;
-  os?: string;
+  os?: OperatingSystem;
   className?: string;
   children: ReactNode;
   onClick?: () => void;
@@ -69,8 +78,8 @@ export function WaitlistOpen({
 
 const roleLabel: Record<Role, string> = {
   research: "Research",
-  build: "Build",
-  teach: "Teach",
+  build: "App development",
+  teach: "Teaching",
 };
 
 function readUtms() {
@@ -87,12 +96,16 @@ function readUtms() {
 
 function WaitlistModal({ opts, onClose }: { opts: OpenOpts; onClose: () => void }) {
   const titleId = useId();
+  const osErrorId = useId();
+  const copy = getAccessRequestCopy(opts.intent);
   const [email, setEmail] = useState("");
+  const [os, setOs] = useState<OperatingSystem | null>(() => normalizeOperatingSystem(opts.os));
   const [role, setRole] = useState<Role | null>(null);
   const [honeypot, setHoneypot] = useState("");
   const [pending, setPending] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const hasOsError = error === "Choose your operating system.";
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
@@ -105,31 +118,37 @@ function WaitlistModal({ opts, onClose }: { opts: OpenOpts; onClose: () => void 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
     if (pending || done) return;
+    if (!os) {
+      setError("Choose your operating system.");
+      return;
+    }
     setPending(true);
     setError(null);
     try {
       const result = await joinWaitlist({
         email,
         role,
-        planIntent: opts.intent && PLAN_INTENTS.includes(opts.intent) ? opts.intent : "lab",
-        os: opts.os,
+        planIntent: normalizePlanIntent(opts.intent),
+        os,
         honeypot,
         ...readUtms(),
       });
       if (!result.ok) {
         setError(
           result.error === "not_configured"
-            ? "Waitlist isn’t wired yet."
+            ? "Access requests are temporarily unavailable. Please try again shortly."
+            : result.error === "invalid_os"
+              ? "Choose your operating system."
             : result.error === "invalid"
               ? "That email doesn’t look right."
-              : "Couldn’t join. Try again.",
+              : "Couldn’t send the request. Try again.",
         );
         return;
       }
       setDone(true);
       if (!honeypot && !result.duplicate) fireWaitlistConversion();
     } catch {
-      setError("Couldn’t join. Try again.");
+      setError("Couldn’t send the request. Try again.");
     } finally {
       setPending(false);
     }
@@ -147,15 +166,15 @@ function WaitlistModal({ opts, onClose }: { opts: OpenOpts; onClose: () => void 
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="relative z-10 w-full max-w-md rounded-md border border-white/10 bg-[#0c0d12] p-6 shadow-2xl"
+        className="relative z-10 max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto rounded-md border border-white/10 bg-[#0c0d12] p-6 shadow-2xl"
       >
         {done ? (
           <div>
             <h2 id={titleId} className="text-xl font-medium tracking-tight text-white">
-              You’re on the list.
+              {copy.successTitle}
             </h2>
             <p className="mt-2 text-[15px] leading-relaxed text-white/50">
-              We’ll write when the Lab beta opens — LSL, OSC, API, and markers.
+              {copy.successBody}
             </p>
             <button type="button" className={`${btnSolid} mt-6 w-full`} onClick={onClose}>
               Close
@@ -164,13 +183,13 @@ function WaitlistModal({ opts, onClose }: { opts: OpenOpts; onClose: () => void 
         ) : (
           <form onSubmit={onSubmit}>
             <h2 id={titleId} className="text-xl font-medium tracking-tight text-white">
-              Join the Lab beta
+              {copy.title}
             </h2>
             <p className="mt-2 text-[15px] leading-relaxed text-white/50">
-              Email when Lab opens. One field. We’ll send a note, not a newsletter.
+              {copy.description}
             </p>
             <label className="mt-6 block text-[13px] text-white/65" htmlFor="waitlist-email">
-              Email
+              Email address
             </label>
             <input
               id="waitlist-email"
@@ -182,12 +201,51 @@ function WaitlistModal({ opts, onClose }: { opts: OpenOpts; onClose: () => void 
               onChange={(event) => setEmail(event.target.value)}
               className="mt-2 h-10 w-full rounded-md border border-white/15 bg-white/[0.04] px-3 text-sm text-white outline-none focus:border-white/30"
             />
-            <p className="mt-5 text-[13px] text-white/65">What you do (optional)</p>
+            <fieldset
+              className="mt-5"
+              aria-invalid={hasOsError || undefined}
+              aria-describedby={hasOsError ? osErrorId : undefined}
+            >
+              <legend className="text-[13px] text-white/65">Operating system</legend>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {OPERATING_SYSTEMS.map((item) => (
+                  <label key={item} className="cursor-pointer">
+                    <input
+                      type="radio"
+                      name="waitlist-os"
+                      value={item}
+                      required
+                      checked={os === item}
+                      onInvalid={(event) => {
+                        event.preventDefault();
+                        setError("Choose your operating system.");
+                      }}
+                      onChange={() => {
+                        setOs(item);
+                        setError(null);
+                      }}
+                      className="peer sr-only"
+                    />
+                    <span
+                      className={
+                        os === item
+                          ? "inline-flex h-8 items-center rounded-md bg-white px-3 text-[13px] font-medium text-black peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-white/40"
+                          : `${btnGhost} peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-white/25`
+                      }
+                    >
+                      {item}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <p className="mt-5 text-[13px] text-white/65">How will you use MindVault? (optional)</p>
             <div className="mt-2 flex flex-wrap gap-2">
               {ROLES.map((item) => (
                 <button
                   key={item}
                   type="button"
+                  aria-pressed={role === item}
                   onClick={() => setRole((current) => (current === item ? null : item))}
                   className={
                     role === item
@@ -209,9 +267,17 @@ function WaitlistModal({ opts, onClose }: { opts: OpenOpts; onClose: () => void 
                 onChange={(event) => setHoneypot(event.target.value)}
               />
             </div>
-            {error ? <p className="mt-4 text-[13px] text-red-400">{error}</p> : null}
+            {error ? (
+              <p
+                id={hasOsError ? osErrorId : undefined}
+                role="alert"
+                className="mt-4 text-[13px] text-red-400"
+              >
+                {error}
+              </p>
+            ) : null}
             <button type="submit" disabled={pending} className={`${btnSolid} mt-6 w-full disabled:opacity-50`}>
-              {pending ? "Joining…" : "Join Lab beta"}
+              {pending ? "Sending…" : copy.submit}
             </button>
           </form>
         )}

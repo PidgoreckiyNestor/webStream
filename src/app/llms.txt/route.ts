@@ -1,3 +1,4 @@
+import { articles } from "@/lib/articles";
 import { faqItems } from "@/lib/faq";
 import { PRODUCT_DEFINITION } from "@/lib/product";
 import { siteUrl } from "@/lib/site";
@@ -6,7 +7,7 @@ export function GET() {
   const base = siteUrl();
   const faq = faqItems.map((item) => `### ${item.q}\n\n${item.a}`).join("\n\n");
   const body = `# MindVault
-> Desktop app for Muse 2, Muse S, and Muse S Athena. Live EEG on a computer — record locally, export CSV, or pipe LSL and OSC.
+> Athena-first desktop app for live 256 Hz EEG, contact quality, CSV recording, and EDF export. Controlled early access is rolling out across Windows, macOS, and Linux.
 
 ${PRODUCT_DEFINITION}
 
@@ -14,13 +15,15 @@ ${PRODUCT_DEFINITION}
 - [Home](${base}): product, how it works, plans, FAQ
 - [Plans](${base}/#pricing): Free, Base, Lab, Research
 - [FAQ](${base}/#faq): headsets, LSL/OSC, Muse app, download
+- [Guides](${base}/articles): Muse EEG on a computer
+${articles.map((item) => `- [${item.navTitle}](${base}/articles/${item.slug}): ${item.dek}`).join("\n")}
 - [Pricing (machine-readable)](${base}/pricing.md)
 
-## Plans
-- Free: 30 minutes live
-- Base: $19/mo — unlimited live, local recording, replay
-- Lab: $49/mo — LSL, OSC, HTTP API, event markers
-- Research: $99/mo — adjustable notch and bandpass, raw and filtered export, filter recipe in the file
+## Plans and rollout
+- Available in current Athena access: Free — 30 minutes live
+- Available in current Athena access: Base ($19/mo) — unlimited live, local recording, CSV and EDF
+- Lab ($49/mo), coming next — LSL, OSC, HTTP API, event markers
+- Research ($99/mo), on the roadmap — adjustable notch and bandpass, raw and filtered export, filter recipe in the file
 
 ## FAQ
 ${faq}
