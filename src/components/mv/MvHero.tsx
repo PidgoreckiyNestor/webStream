@@ -69,14 +69,6 @@ export function MvHero() {
           <div data-mv-hero className="mt-8">
             <PlatformBadges />
           </div>
-          <div data-mv-hero className="mt-4">
-            <InPageAnchor
-              targetId="pricing"
-              className="inline-flex items-center justify-center rounded-full border border-white/15 bg-transparent px-4 py-2.5 text-sm font-medium text-white/80 transition-colors duration-150 hover:border-white/25 hover:bg-white/[0.06] hover:text-white cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/25"
-            >
-              See plans
-            </InPageAnchor>
-          </div>
         </div>
         <div data-mv-hero className="mt-10">
           <NameMarquee />
@@ -84,6 +76,14 @@ export function MvHero() {
         <div data-mv-hero className="relative mx-auto mt-10 w-full max-w-5xl flex-1 lg:mt-14">
           <div className="absolute -inset-10 -z-10 rounded-3xl bg-primary/12 blur-3xl" />
           <ProductCarousel />
+        </div>
+        <div data-mv-hero className="mt-8 flex justify-center pb-2 lg:mt-10">
+          <InPageAnchor
+            targetId="pricing"
+            className="inline-flex items-center justify-center rounded-full border border-white/15 bg-transparent px-4 py-2.5 text-sm font-medium text-white/80 transition-colors duration-150 hover:border-white/25 hover:bg-white/[0.06] hover:text-white cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/25"
+          >
+            Pick a plan
+          </InPageAnchor>
         </div>
       </div>
     </section>
