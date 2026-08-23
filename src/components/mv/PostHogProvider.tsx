@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import posthog from "posthog-js";
 
 const key = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 const host = process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://us.i.posthog.com";
@@ -14,17 +13,32 @@ export function PostHogPageview() {
 
   useEffect(() => {
     if (!key || typeof window === "undefined" || started) return;
-    posthog.init(key, {
-      api_host: host,
-      capture_pageview: false,
-      person_profiles: "identified_only",
-    });
-    started = true;
+
+    const boot = () => {
+      if (started) return;
+      started = true;
+      void import("posthog-js").then(({ default: posthog }) => {
+        posthog.init(key, {
+          api_host: host,
+          capture_pageview: false,
+          autocapture: false,
+          disable_session_recording: true,
+          disable_surveys: true,
+          person_profiles: "identified_only",
+        });
+        posthog.capture("$pageview", { $current_url: window.location.href });
+      });
+    };
+
+    const t = window.setTimeout(boot, 2500);
+    return () => window.clearTimeout(t);
   }, []);
 
   useEffect(() => {
     if (!key || !started) return;
-    posthog.capture("$pageview", { $current_url: window.location.href });
+    void import("posthog-js").then(({ default: posthog }) => {
+      posthog.capture("$pageview", { $current_url: window.location.href });
+    });
   }, [pathname, searchParams]);
 
   return null;

@@ -4,7 +4,7 @@ import { ProductCarousel } from "@/components/mv/ProductCarousel";
 
 const proof = ["Live stream", "Local recording", "Ready to export"];
 
-const streamSpec = ["TP9", "AF7", "AF8", "TP10", "256 Hz", "PPG", "IMU", "CSV", "LSL", "OSC"];
+const streamSpec = ["TP9", "AF7", "AF8", "TP10", "256 Hz", "PPG", "IMU", "CSV", "EDF", "LSL", "OSC"];
 
 function NameMarquee() {
   return (
@@ -55,7 +55,7 @@ export function MvHero() {
       <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl pt-4 text-center">
           <p data-mv-hero className="text-sm font-medium tracking-wide text-primary-muted">
-            Desktop app for Muse 2 and Muse S
+            Desktop app for Muse 2, Muse S, and Muse S Athena
           </p>
           <h1
             data-mv-hero

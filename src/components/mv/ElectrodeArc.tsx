@@ -140,7 +140,7 @@ export function ElectrodeArc() {
         }}
       />
       <div className="relative flex items-center justify-between">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-white/45">Electrode placement</p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-white/65">Electrode placement</p>
         <span className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-emerald-400/80">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
           Live

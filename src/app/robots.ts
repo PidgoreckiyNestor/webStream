@@ -7,8 +7,10 @@ const aiBots = [
   "OAI-SearchBot",
   "PerplexityBot",
   "ClaudeBot",
+  "anthropic-ai",
   "Google-Extended",
   "Applebot-Extended",
+  "Bingbot",
 ];
 
 export default function robots(): MetadataRoute.Robots {

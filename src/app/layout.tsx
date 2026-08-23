@@ -1,21 +1,8 @@
 import type { Metadata } from "next";
-import { DM_Sans, Geist, Public_Sans } from "next/font/google";
-import { JsonLd } from "@/components/mv/JsonLd";
+import { Geist } from "next/font/google";
 import { Providers } from "@/components/mv/Providers";
 import { isIndexable, siteUrl } from "@/lib/site";
 import "./globals.css";
-
-const publicSans = Public_Sans({
-  variable: "--font-public-sans",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -23,9 +10,9 @@ const geist = Geist({
   display: "swap",
 });
 
-const title = "MindVault — Muse EEG on your computer";
+const title = "MindVault — Muse EEG on your computer, LSL or CSV";
 const description =
-  "Desktop app for Muse 2 and Muse S. Live stream, local recording, LSL, OSC, and CSV — on a desk.";
+  "Desktop app for Muse 2, Muse S, and Muse S Athena. Stream 256 Hz EEG on your computer — record locally, export CSV, or pipe LSL. Windows, macOS, Linux. No phone.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
@@ -55,7 +42,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${publicSans.variable} ${dmSans.variable} ${geist.variable} dark h-full`}
+      className={`${geist.variable} dark h-full`}
     >
       <body className="antialiased min-h-screen flex flex-col">
         <a
@@ -64,7 +51,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to main content
         </a>
-        <JsonLd />
         <Providers>{children}</Providers>
       </body>
     </html>

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { InPageAnchor } from "@/components/mv/InPageAnchor";
 
 const footerLink =
-  "inline-block rounded-md text-[13px] text-white/45 transition-colors duration-150 hover:text-white cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/25";
+  "inline-block min-h-11 rounded-md py-2 text-[13px] text-white/65 transition-colors duration-150 hover:text-white cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/25";
 
 const footerHeading = "text-[13px] font-medium text-white";
 
@@ -96,7 +96,7 @@ export function MvFooter() {
         </div>
         <div className="relative z-10 mx-auto flex min-h-[20rem] max-w-7xl flex-col justify-between gap-12 px-4 pt-10 pb-4 sm:min-h-[22rem] sm:px-6 lg:px-8">
           <CompactColumns />
-          <p className="text-center text-[13px] text-white/30">© 2026 MindVault. All rights reserved.</p>
+          <p className="text-center text-[13px] text-white/55">© 2026 MindVault. All rights reserved.</p>
         </div>
     </footer>
   );

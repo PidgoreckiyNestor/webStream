@@ -1,15 +1,20 @@
+import { faqItems } from "@/lib/faq";
+import { PRODUCT_DEFINITION } from "@/lib/product";
 import { siteUrl } from "@/lib/site";
 
 export function GET() {
   const base = siteUrl();
+  const faq = faqItems.map((item) => `### ${item.q}\n\n${item.a}`).join("\n\n");
   const body = `# MindVault
-> Desktop app for Muse 2 and Muse S. Live EEG on a computer — record locally, export CSV, or pipe LSL and OSC.
+> Desktop app for Muse 2, Muse S, and Muse S Athena. Live EEG on a computer — record locally, export CSV, or pipe LSL and OSC.
 
-MindVault streams Muse EEG (TP9, AF7, AF8, TP10 at 256 Hz) plus PPG and IMU to Windows, macOS, and Linux. No phone in the loop. Lab adds LSL, OSC, an HTTP API, and event markers.
+${PRODUCT_DEFINITION}
 
 ## Pages
-- [Home](${base}): product, how it works, and plans
+- [Home](${base}): product, how it works, plans, FAQ
 - [Plans](${base}/#pricing): Trial, Plus, Lab, Research
+- [FAQ](${base}/#faq): headsets, LSL/OSC, Muse app, download
+- [Pricing (machine-readable)](${base}/pricing.md)
 
 ## Plans
 - Trial: 30 minutes live
@@ -17,8 +22,8 @@ MindVault streams Muse EEG (TP9, AF7, AF8, TP10 at 256 Hz) plus PPG and IMU to W
 - Lab: $49/mo — LSL, OSC, HTTP API, event markers
 - Research: $99/mo — signal filters
 
-## Not
-MindVault is not a meditation score app, not a Muse phone companion, and not the unrelated “MindVault” note/RAG tools on other domains.
+## FAQ
+${faq}
 `;
 
   return new Response(body, {

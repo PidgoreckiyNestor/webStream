@@ -5,21 +5,21 @@ const steps = [
   {
     n: "01",
     title: "Connect Muse",
-    body: "Pair Muse 2 or Muse S over Bluetooth. No extra hardware.",
+    body: "Pair Muse 2, Muse S, or Muse S Athena over Bluetooth. No extra hardware.",
     shot: "/images/shot-connect-3.png",
     alt: "Muse S found over Bluetooth, ready to connect",
   },
   {
     n: "02",
     title: "Watch it live",
-    body: "Bands on the live view while the headset is on.",
+    body: "256 Hz bands on the live view while the headset is on.",
     shot: "/images/shot-watch.png",
     alt: "Live band power over time from Muse",
   },
   {
     n: "03",
     title: "Analyse data",
-    body: "Band power, spectrogram, and the stream — on one screen.",
+    body: "Band power, spectrogram, then CSV or EDF — or LSL on Lab.",
     shot: "/images/shot-analyse.png",
     alt: "Spectrogram and band stream analysis",
   },
@@ -53,7 +53,8 @@ export function HowItWorks() {
                   alt={step.alt}
                   fill
                   className="object-contain"
-                  sizes="(min-width: 1024px) 30vw, 100vw"
+                  sizes="(min-width: 768px) 28vw, calc(100vw - 2rem)"
+                  quality={70}
                 />
               </div>
               <h3 className="mt-8 text-lg font-medium tracking-tight text-white">{step.title}</h3>

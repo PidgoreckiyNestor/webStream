@@ -39,6 +39,8 @@ export function BrandLogos() {
                 alt=""
                 width={28}
                 height={28}
+                loading="lazy"
+                decoding="async"
                 className="h-7 w-7 shrink-0 brightness-0 invert"
               />
               <span className="text-sm font-medium text-white/80">{tool.name}</span>

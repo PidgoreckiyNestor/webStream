@@ -16,10 +16,16 @@ export function AidaMotion({ children }: { children: ReactNode }) {
     () => {
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (reduced) {
-        gsap.set("[data-mv-hero], [data-mv-fade]", { opacity: 1, y: 0, clearProps: "transform" });
+        gsap.set("[data-mv-nav], [data-mv-hero], [data-mv-fade]", { opacity: 1, y: 0, clearProps: "transform" });
         gsap.set("[data-mv-mark]", { xPercent: 4, opacity: 0.16 });
         return;
       }
+
+      gsap.fromTo(
+        "[data-mv-nav]",
+        { opacity: 0, y: -10 },
+        { opacity: 1, y: 0, duration: 0.55, ease, delay: 0.02 },
+      );
 
       gsap.fromTo(
         "[data-mv-hero]",
@@ -28,25 +34,28 @@ export function AidaMotion({ children }: { children: ReactNode }) {
       );
 
       gsap.utils.toArray<HTMLElement>("[data-mv-reveal]").forEach((section) => {
-        const items = section.querySelectorAll("[data-mv-fade]");
+        const items = [...section.querySelectorAll<HTMLElement>("[data-mv-fade]")];
         if (!items.length) return;
-        gsap.fromTo(
-          items,
-          { opacity: 0, y: 16 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            stagger: 0.07,
-            ease,
-            scrollTrigger: {
-              trigger: section,
-              start: "top 84%",
-              once: true,
-            },
+
+        const stagger = items.length > 8 ? 0.07 : items.length > 1 ? 0.14 : 0.07;
+        gsap.set(items, { opacity: 0, y: 16 });
+        let played = false;
+        const play = () => {
+          if (played) return;
+          played = true;
+          gsap.to(items, { opacity: 1, y: 0, duration: 0.7, stagger, ease, overwrite: true });
+        };
+        ScrollTrigger.create({
+          trigger: section,
+          start: "top 82%",
+          once: true,
+          onEnter: play,
+          onRefresh: (self) => {
+            if (self.isActive || self.progress > 0) play();
           },
-        );
+        });
       });
+      requestAnimationFrame(() => ScrollTrigger.refresh());
 
       gsap.fromTo(
         "[data-mv-mark]",

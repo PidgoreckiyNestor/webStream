@@ -160,7 +160,7 @@ function WaitlistModal({ opts, onClose }: { opts: OpenOpts; onClose: () => void 
             <p className="mt-2 text-[15px] leading-relaxed text-white/50">
               Email when Lab opens. One field. We’ll send a note, not a newsletter.
             </p>
-            <label className="mt-6 block text-[13px] text-white/45" htmlFor="waitlist-email">
+            <label className="mt-6 block text-[13px] text-white/65" htmlFor="waitlist-email">
               Email
             </label>
             <input
@@ -173,7 +173,7 @@ function WaitlistModal({ opts, onClose }: { opts: OpenOpts; onClose: () => void 
               onChange={(event) => setEmail(event.target.value)}
               className="mt-2 h-10 w-full rounded-md border border-white/15 bg-white/[0.04] px-3 text-sm text-white outline-none focus:border-white/30"
             />
-            <p className="mt-5 text-[13px] text-white/45">What you do (optional)</p>
+            <p className="mt-5 text-[13px] text-white/65">What you do (optional)</p>
             <div className="mt-2 flex flex-wrap gap-2">
               {ROLES.map((item) => (
                 <button

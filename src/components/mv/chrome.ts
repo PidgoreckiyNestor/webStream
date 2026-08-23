@@ -10,4 +10,4 @@ export const btnGhost =
 export const btnSolid =
   "inline-flex h-8 items-center justify-center rounded-md bg-white px-3.5 text-[13px] font-medium text-black transition-colors duration-150 hover:bg-white/90 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40";
 
-export const sectionKicker = "text-[13px] font-medium tracking-wide text-white/40";
+export const sectionKicker = "text-[13px] font-medium tracking-wide text-white/55";

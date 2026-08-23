@@ -23,7 +23,7 @@ const mindvaultPlans = [
     cta: "Get Plus",
     popular: false,
     ghost: false,
-    features: ["Unlimited live", "Local recording", "Replay and inspect the session"],
+    features: ["Unlimited live", "Local recording", "CSV and EDF export"],
   },
   {
     name: "Lab",
@@ -65,7 +65,7 @@ function PlanBody({ plan }: { plan: (typeof mindvaultPlans)[number] }) {
       </h3>
       <div className="mt-5 flex items-baseline gap-1">
         <span className="text-4xl font-medium tracking-tight text-white">{plan.price}</span>
-        {plan.period ? <span className="text-sm text-white/40">{plan.period}</span> : null}
+        {plan.period ? <span className="text-sm text-white/55">{plan.period}</span> : null}
       </div>
       <p className="mt-2 text-[15px] leading-relaxed text-white/45">{plan.blurb}</p>
       <ul role="list" className="mt-6 flex-1 space-y-2.5 border-t border-white/10 pt-6">
@@ -91,19 +91,21 @@ function PlanBody({ plan }: { plan: (typeof mindvaultPlans)[number] }) {
 
 export function Pricing() {
   return (
-    <section className="py-20 sm:py-28" data-mv-reveal>
+    <section className="py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div id="pricing" className="max-w-2xl scroll-mt-[5.25rem]" data-mv-fade>
-          <p className={sectionKicker}>Plans</p>
-          <h2 className="mt-4 text-4xl font-medium tracking-tight text-white sm:text-5xl">
-            Thirty minutes on the desk. Then pick a plan.
-          </h2>
-          <p className="mt-4 text-lg text-white/50">
-            Connect Muse and watch the live view. Analysis, live-out, and filters sit on a plan.
-          </p>
+        <div id="pricing" className="max-w-2xl scroll-mt-[5.25rem]" data-mv-reveal>
+          <div data-mv-fade>
+            <p className={sectionKicker}>Plans</p>
+            <h2 className="mt-4 text-4xl font-medium tracking-tight text-white sm:text-5xl">
+              Thirty minutes on the desk. Then pick a plan.
+            </h2>
+            <p className="mt-4 text-lg text-white/50">
+              Connect Muse and watch the live view. Analysis, live-out, and filters sit on a plan.
+            </p>
+          </div>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4" data-mv-reveal>
           {mindvaultPlans.map((plan) => (
             <div
               key={plan.name}
@@ -114,7 +116,9 @@ export function Pricing() {
             </div>
           ))}
         </div>
-        <p className="mt-8 text-[13px] text-white/35">All plans: TP9 AF7 AF8 TP10 · 256 Hz</p>
+        <p className="mt-8 text-[13px] text-white/55" data-mv-reveal>
+          <span data-mv-fade>All plans: TP9 AF7 AF8 TP10 · 256 Hz</span>
+        </p>
       </div>
     </section>
   );

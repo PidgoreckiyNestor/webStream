@@ -20,7 +20,7 @@ export function MvHeader() {
   }
 
   return (
-    <header className="fixed top-0 right-0 left-0 z-50 pt-3">
+    <header data-mv-nav className="fixed top-0 right-0 left-0 z-50 pt-3">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-background/90 to-transparent" />
       <nav
         className="relative mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8"
@@ -43,13 +43,16 @@ export function MvHeader() {
             <InPageAnchor targetId="pricing" className={navText}>
               Pricing
             </InPageAnchor>
+            <InPageAnchor targetId="faq" className={navText}>
+              FAQ
+            </InPageAnchor>
           </div>
         </div>
 
         <div className="flex lg:hidden">
           <button
             type="button"
-            className="inline-flex h-8 w-8 items-center justify-center rounded-md text-white/60 hover:bg-white/[0.06] hover:text-white cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/25"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-md text-white/70 hover:bg-white/[0.06] hover:text-white cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/25"
             aria-expanded={open}
             aria-controls="mobile-menu"
             onClick={() => setOpen((value) => !value)}
@@ -83,6 +86,9 @@ export function MvHeader() {
             </InPageAnchor>
             <InPageAnchor targetId="pricing" className={mobileNavLink} onClick={() => closeMenu()}>
               Pricing
+            </InPageAnchor>
+            <InPageAnchor targetId="faq" className={mobileNavLink} onClick={() => closeMenu()}>
+              FAQ
             </InPageAnchor>
             <div className="mt-3 flex gap-2 border-t border-white/10 pt-3">
               <button type="button" className={`${btnGhost} flex-1`}>
