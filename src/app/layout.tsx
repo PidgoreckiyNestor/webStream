@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import { GoogleAdsTag } from "@/components/mv/GoogleAdsTag";
 import { Providers } from "@/components/mv/Providers";
 import { isIndexable, siteUrl } from "@/lib/site";
 import "./globals.css";
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geist.variable} dark h-full`}
     >
       <body className="antialiased min-h-screen flex flex-col">
+        <GoogleAdsTag />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:text-cta-fg"

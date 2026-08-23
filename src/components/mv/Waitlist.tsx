@@ -11,6 +11,7 @@ import {
 } from "react";
 import { joinWaitlist } from "@/app/actions/waitlist";
 import { btnGhost, btnSolid } from "@/components/mv/chrome";
+import { fireWaitlistConversion } from "@/lib/google-ads";
 import { PLAN_INTENTS, ROLES, type PlanIntent, type Role } from "@/lib/waitlist";
 
 type OpenOpts = { intent?: PlanIntent | null; os?: string | null };
@@ -124,6 +125,7 @@ function WaitlistModal({ opts, onClose }: { opts: OpenOpts; onClose: () => void 
       return;
     }
     setDone(true);
+    if (!honeypot && !result.duplicate) fireWaitlistConversion();
   }
 
   return (
