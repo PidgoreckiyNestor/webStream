@@ -20,7 +20,7 @@ export function InPageAnchor({
     if (el) {
       event.preventDefault();
       el.scrollIntoView({ behavior: "smooth", block: "start" });
-      history.replaceState(null, "", `#${targetId}`);
+      history.replaceState(null, "", `${window.location.search}#${targetId}`);
     }
     onClick?.();
   }

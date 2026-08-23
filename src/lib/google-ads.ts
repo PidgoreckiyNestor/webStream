@@ -41,11 +41,27 @@ function adsClickFromParams(params: URLSearchParams): AdsClick {
   };
 }
 
+function asOptionalString(value: unknown): string | null {
+  return typeof value === "string" && value.length > 0 ? value : null;
+}
+
 export function isGoogleAdsClick(click: AdsClick): boolean {
   if (click.gclid) return true;
   const source = click.utmSource?.toLowerCase();
   const medium = click.utmMedium?.toLowerCase();
   return source === "google" && (medium === "cpc" || medium === "ppc" || medium === "paid");
+}
+
+function parseAdsClick(value: unknown): AdsClick | null {
+  if (!value || typeof value !== "object") return null;
+  const rec = value as Record<string, unknown>;
+  const click: AdsClick = {
+    gclid: asOptionalString(rec.gclid),
+    utmSource: asOptionalString(rec.utmSource),
+    utmMedium: asOptionalString(rec.utmMedium),
+    utmCampaign: asOptionalString(rec.utmCampaign),
+  };
+  return isGoogleAdsClick(click) ? click : null;
 }
 
 export function captureGoogleAdsClick() {
@@ -66,8 +82,7 @@ export function readGoogleAdsClick(): AdsClick | null {
   try {
     const raw = sessionStorage.getItem(CLICK_STORAGE_KEY);
     if (!raw) return null;
-    const stored = JSON.parse(raw) as AdsClick;
-    return isGoogleAdsClick(stored) ? stored : null;
+    return parseAdsClick(JSON.parse(raw));
   } catch {
     return null;
   }
