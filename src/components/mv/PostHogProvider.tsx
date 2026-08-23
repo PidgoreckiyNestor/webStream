@@ -23,6 +23,7 @@ export function PostHogPageview() {
           api_host: host,
           ui_host: uiHost,
           capture_pageview: false,
+          capture_pageleave: true,
           autocapture: false,
           disable_session_recording: true,
           disable_surveys: true,
@@ -39,6 +40,7 @@ export function PostHogPageview() {
   useEffect(() => {
     if (!key || !started) return;
     void import("posthog-js").then(({ default: posthog }) => {
+      posthog.capture("$pageleave");
       posthog.capture("$pageview", { $current_url: window.location.href });
     });
   }, [pathname, searchParams]);
