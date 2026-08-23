@@ -66,7 +66,7 @@ async function sendJoinEmail(email: string) {
     const resend = new Resend(apiKey);
     const letter = labBetaJoinEmail();
     const logo = await readLogoPng();
-    await resend.emails.send({
+    const { error } = await resend.emails.send({
       from,
       to: email,
       subject: letter.subject,
@@ -83,6 +83,7 @@ async function sendJoinEmail(email: string) {
           ]
         : undefined,
     });
+    if (error) console.error("waitlist email failed", error.message);
   } catch (err) {
     console.error("waitlist email failed", err);
   }
