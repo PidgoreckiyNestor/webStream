@@ -4,6 +4,13 @@ import { useEffect, useRef, type ReactNode } from "react";
 
 const ease = "power2.out";
 
+function reveal(el: HTMLElement) {
+  el.querySelectorAll<HTMLElement>("[data-mv-fade]").forEach((node) => {
+    node.style.opacity = "1";
+    node.style.transform = "none";
+  });
+}
+
 export function AidaMotion({ children }: { children: ReactNode }) {
   const root = useRef<HTMLDivElement>(null);
 
@@ -13,44 +20,41 @@ export function AidaMotion({ children }: { children: ReactNode }) {
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) {
-      el.querySelectorAll<HTMLElement>("[data-mv-fade]").forEach((node) => {
-        node.style.opacity = "1";
-        node.style.transform = "none";
-      });
+      reveal(el);
       return;
     }
 
     let reverted = false;
     let started = false;
     let ctx: { revert: () => void } | undefined;
-    let idleId = 0;
-    let timeoutId = 0;
 
-    const revealNow = () => {
-      el.querySelectorAll<HTMLElement>("[data-mv-fade]").forEach((node) => {
-        node.style.opacity = "1";
-        node.style.transform = "none";
-      });
-    };
-
-    const fallbackId = window.setTimeout(revealNow, 2500);
+    const fallbackId = window.setTimeout(() => {
+      if (!started) reveal(el);
+    }, 4000);
 
     const boot = () => {
       if (started || reverted) return;
       started = true;
       window.clearTimeout(fallbackId);
-      window.removeEventListener("scroll", onFirstScroll);
+      window.removeEventListener("scroll", boot);
       void Promise.all([import("gsap"), import("gsap/ScrollTrigger")])
         .then(([gsapMod, stMod]) => {
           if (reverted) return;
           const gsap = gsapMod.default;
           const { ScrollTrigger } = stMod;
           gsap.registerPlugin(ScrollTrigger);
+          const fold = window.innerHeight * 0.82;
 
           ctx = gsap.context(() => {
             gsap.utils.toArray<HTMLElement>("[data-mv-reveal]").forEach((section) => {
               const items = [...section.querySelectorAll<HTMLElement>("[data-mv-fade]")];
               if (!items.length) return;
+
+              const already = section.getBoundingClientRect().top < fold;
+              if (already) {
+                gsap.set(items, { opacity: 1, y: 0 });
+                return;
+              }
 
               const stagger = items.length > 8 ? 0.07 : items.length > 1 ? 0.14 : 0.07;
               gsap.set(items, { opacity: 0, y: 16 });
@@ -89,26 +93,15 @@ export function AidaMotion({ children }: { children: ReactNode }) {
             requestAnimationFrame(() => ScrollTrigger.refresh());
           }, el);
         })
-        .catch(revealNow);
+        .catch(() => reveal(el));
     };
 
-    const onFirstScroll = () => boot();
-    window.addEventListener("scroll", onFirstScroll, { once: true, passive: true });
-
-    if (typeof window.requestIdleCallback === "function") {
-      idleId = window.requestIdleCallback(boot, { timeout: 1400 });
-    } else {
-      timeoutId = window.setTimeout(boot, 1);
-    }
+    window.addEventListener("scroll", boot, { once: true, passive: true });
 
     return () => {
       reverted = true;
       window.clearTimeout(fallbackId);
-      window.removeEventListener("scroll", onFirstScroll);
-      if (idleId && typeof window.cancelIdleCallback === "function") {
-        window.cancelIdleCallback(idleId);
-      }
-      if (timeoutId) window.clearTimeout(timeoutId);
+      window.removeEventListener("scroll", boot);
       ctx?.revert();
     };
   }, []);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type QualityState = "ok" | "weak" | "bad";
 
@@ -112,12 +112,17 @@ function ElectrodeRings({ pads }: { pads: Pad[] }) {
 
 export function ElectrodeArc() {
   const [pads, setPads] = useState(BASE);
+  const root = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
+    const node = root.current;
+    if (!node) return;
+
+    let interval = 0;
     const started = performance.now();
-    const id = window.setInterval(() => {
+    const tick = () => {
       const t = (performance.now() - started) / 1000;
       setPads(
         BASE.map((p, i) => ({
@@ -126,12 +131,33 @@ export function ElectrodeArc() {
           qpct: Math.min(99, Math.max(62, Math.round(p.qpct + Math.sin(t * 0.45 + i * 1.9) * 3))),
         })),
       );
-    }, 180);
-    return () => window.clearInterval(id);
+    };
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          if (!interval) interval = window.setInterval(tick, 180);
+          return;
+        }
+        if (interval) {
+          window.clearInterval(interval);
+          interval = 0;
+        }
+      },
+      { rootMargin: "80px" },
+    );
+    io.observe(node);
+    return () => {
+      io.disconnect();
+      if (interval) window.clearInterval(interval);
+    };
   }, []);
 
   return (
-    <div className="relative flex h-full min-h-[22rem] flex-col overflow-hidden rounded-xl border border-white/[0.07] bg-[#07080d] px-5 py-5 sm:px-6 sm:py-6">
+    <div
+      ref={root}
+      className="relative flex h-full min-h-[22rem] flex-col overflow-hidden rounded-xl border border-white/[0.07] bg-[#07080d] px-5 py-5 sm:px-6 sm:py-6"
+    >
       <div
         className="pointer-events-none absolute inset-0"
         style={{
