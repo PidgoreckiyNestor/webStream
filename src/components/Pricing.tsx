@@ -67,7 +67,7 @@ function PlanBody({ plan }: { plan: (typeof mindvaultPlans)[number] }) {
         <span className="text-4xl font-medium tracking-tight text-white">{plan.price}</span>
         {plan.period ? <span className="text-sm text-white/55">{plan.period}</span> : null}
       </div>
-      <p className="mt-2 text-[15px] leading-relaxed text-foreground-muted">{plan.blurb}</p>
+      <p className="mt-2 text-[15px] leading-relaxed text-white/55">{plan.blurb}</p>
       <ul role="list" className="mt-6 flex-1 space-y-2.5 border-t border-white/10 pt-6">
         {plan.features.map((feature) => (
           <li key={feature} className="text-sm text-white/55">

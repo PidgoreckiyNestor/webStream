@@ -58,7 +58,7 @@ export function HowItWorks() {
                 />
               </div>
               <h3 className="mt-8 text-lg font-medium tracking-tight text-white">{step.title}</h3>
-              <p className="mt-2 max-w-sm text-[15px] leading-relaxed text-foreground-muted">{step.body}</p>
+              <p className="mt-2 max-w-sm text-[15px] leading-relaxed text-white/55">{step.body}</p>
             </article>
           ))}
         </div>
