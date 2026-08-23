@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { DM_Sans, Geist, Public_Sans } from "next/font/google";
+import { JsonLd } from "@/components/mv/JsonLd";
 import { Providers } from "@/components/mv/Providers";
+import { isIndexable, siteUrl } from "@/lib/site";
 import "./globals.css";
 
 const publicSans = Public_Sans({
@@ -21,18 +23,31 @@ const geist = Geist({
   display: "swap",
 });
 
+const title = "MindVault — Muse EEG on your computer";
+const description =
+  "Desktop app for Muse 2 and Muse S. Live stream, local recording, LSL, OSC, and CSV — on a desk.";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("http://localhost:3000"),
-  title: "MindVault — Muse EEG on your computer",
-  description:
-    "Desktop app for Muse 2 and Muse S. Live stream, local recording, LSL, OSC, and CSV — on a desk.",
-  robots: { index: false, follow: false },
+  metadataBase: new URL(siteUrl()),
+  title,
+  description,
+  alternates: { canonical: "/" },
+  robots: isIndexable()
+    ? { index: true, follow: true }
+    : { index: false, follow: false },
   openGraph: {
-    title: "MindVault — Muse EEG on your computer",
-    description: "Desktop app for Muse 2 and Muse S. Live stream, local recording, and live-out.",
+    title,
+    description,
     siteName: "MindVault",
     locale: "en_US",
     type: "website",
+    images: [{ url: "/og-image.png" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/og-image.png"],
   },
 };
 
@@ -49,6 +64,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to main content
         </a>
+        <JsonLd />
         <Providers>{children}</Providers>
       </body>
     </html>
