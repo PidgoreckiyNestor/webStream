@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { btnGhost, btnSolid } from "@/components/mv/chrome";
 import { MvFooter } from "@/components/mv/MvFooter";
@@ -8,6 +9,8 @@ const platforms = [
   { name: "macOS", src: "/images/brands/apple.svg", href: "/signup?os=macos" },
   { name: "Linux", src: "/images/brands/linux.svg", href: "/signup?os=linux" },
 ] as const;
+
+export const metadata: Metadata = { robots: { index: false, follow: false } };
 
 export default function DownloadPage() {
   return (
