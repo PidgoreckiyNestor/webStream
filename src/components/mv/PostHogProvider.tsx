@@ -35,10 +35,6 @@ export function PostHogPageview() {
       });
     };
 
-    if ("requestIdleCallback" in window) {
-      const idle = window.requestIdleCallback(boot, { timeout: 1500 });
-      return () => window.cancelIdleCallback(idle);
-    }
     const t = window.setTimeout(boot, 800);
     return () => window.clearTimeout(t);
   }, []);
