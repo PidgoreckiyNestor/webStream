@@ -18,6 +18,8 @@
   --warning: #f59e0b;
   --error: #ef4444;
   --radius: 0.5rem;
+  --cta-fg: #010101;
+  --cta-wash: #0d0812;
 }
 
 @theme inline {
@@ -37,9 +39,103 @@
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-error: var(--error);
+  --color-cta-fg: var(--cta-fg);
   --font-sans: var(--font-dm-sans);
   --font-heading: var(--font-public-sans);
   --radius-lg: var(--radius);
+}
+
+.theme-v1,
+.theme-v2,
+.theme-v3,
+.theme-v4 {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+  min-height: 100%;
+}
+
+.theme-v1 h1,
+.theme-v1 h2,
+.theme-v1 h3,
+.theme-v2 h1,
+.theme-v2 h2,
+.theme-v2 h3,
+.theme-v3 h1,
+.theme-v3 h2,
+.theme-v3 h3,
+.theme-v4 h1,
+.theme-v4 h2,
+.theme-v4 h3 {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* V1 — mockup: mint CTAs, MindVault wordmark, near-black */
+.theme-v1 {
+  --background: #050508;
+  --background-surface: #0c0c12;
+  --primary: #5b4bdc;
+  --primary-hover: #6a5ae8;
+  --primary-muted: #c7b8ff;
+  --accent: #5de4a8;
+  --accent-hover: #6cc197;
+  --cta-fg: #06110c;
+  --cta-wash: #0d0812;
+  --foreground: #ffffff;
+  --foreground-muted: #999999;
+  --radius: 0.5rem;
+}
+
+/* V2 — recommended: glow violet CTAs, app navy */
+.theme-v2 {
+  --background: #06070a;
+  --background-surface: #07080d;
+  --background-elevated: #12141d;
+  --primary: #5b4bdc;
+  --primary-hover: #6a5ae8;
+  --primary-muted: #c7b8ff;
+  --accent: oklch(0.75 0.15 290);
+  --accent-hover: #6a5ae8;
+  --cta-fg: oklch(0.08 0 0);
+  --cta-wash: #0a0814;
+  --foreground: #e9eaf0;
+  --foreground-muted: #85889a;
+  --border: rgba(255, 255, 255, 0.08);
+  --radius: 0.75rem;
+}
+
+/* V3 — solid brand buttons, light label */
+.theme-v3 {
+  --background: #06070a;
+  --background-surface: #07080d;
+  --primary: #5b4bdc;
+  --primary-hover: #6a5ae8;
+  --primary-muted: #c7b8ff;
+  --accent: #5b4bdc;
+  --accent-hover: #6a5ae8;
+  --cta-fg: #e9eaf0;
+  --cta-wash: #0b0918;
+  --foreground: #e9eaf0;
+  --foreground-muted: #85889a;
+  --border: rgba(255, 255, 255, 0.08);
+  --radius: 0.75rem;
+}
+
+/* V4 — quiet: glow CTAs, no fake social proof, more air */
+.theme-v4 {
+  --background: #07080d;
+  --background-surface: #0b0c14;
+  --primary: #5b4bdc;
+  --primary-hover: #6a5ae8;
+  --primary-muted: #c7b8ff;
+  --accent: oklch(0.72 0.12 290);
+  --accent-hover: #6a5ae8;
+  --cta-fg: oklch(0.08 0 0);
+  --cta-wash: #08070f;
+  --foreground: #e9eaf0;
+  --foreground-muted: #85889a;
+  --border: rgba(255, 255, 255, 0.08);
+  --radius: 0.75rem;
 }
 
 html {
@@ -83,10 +179,26 @@ h6 {
   }
 }
 
+[data-mv-hero],
+[data-mv-fade] {
+  opacity: 0;
+}
+
+[data-mv-mark] {
+  opacity: 0.16;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-mv-hero],
+  [data-mv-fade] {
+    opacity: 1;
+  }
+}
+
 @keyframes fade-in-up {
   0% {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -161,6 +273,55 @@ h6 {
   animation-delay: 400ms;
 }
 
+@keyframes eeg-halo {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.12;
+  }
+}
+
+.eeg-halo {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: 5.5s ease-in-out infinite eeg-halo;
+}
+
+@property --plan-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes plan-angle {
+  to {
+    --plan-angle: 360deg;
+  }
+}
+
+.plan-glow {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(#0c0d12, #0c0d12) padding-box,
+    conic-gradient(
+      from var(--plan-angle),
+      rgba(255, 255, 255, 0.1) 0deg,
+      rgba(255, 255, 255, 0.08) 195deg,
+      rgba(91, 75, 220, 0.55) 248deg,
+      oklch(0.78 0.16 290) 274deg,
+      rgba(255, 255, 255, 0.95) 286deg,
+      oklch(0.78 0.16 290) 298deg,
+      rgba(91, 75, 220, 0.55) 328deg,
+      rgba(255, 255, 255, 0.1) 360deg
+    )
+      border-box;
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  animation: 5.5s linear infinite plan-angle;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -170,8 +331,26 @@ h6 {
   .animate-fade-in-up,
   .animate-fade-in,
   .animate-scale-in,
-  .animate-gradient-border {
+  .animate-gradient-border,
+  .plan-glow {
     animation: none;
+    transform: none;
+  }
+
+  .animate-fade-in-up,
+  .animate-fade-in,
+  .animate-scale-in,
+  .animate-gradient-border {
+    opacity: 1;
+  }
+
+  .eeg-halo {
+    animation: none;
+    opacity: 0.4;
+  }
+
+  .plan-glow {
+    --plan-angle: 210deg;
   }
 
   .opacity-0.animate-fade-in-up,

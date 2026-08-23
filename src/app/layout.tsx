@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Public_Sans } from "next/font/google";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
+import { DM_Sans, Geist, Public_Sans } from "next/font/google";
 import "./globals.css";
 
 const publicSans = Public_Sans({
@@ -12,6 +10,12 @@ const publicSans = Public_Sans({
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const geist = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
   display: "swap",
 });
@@ -48,17 +52,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${publicSans.variable} ${dmSans.variable} dark h-full`}>
+    <html
+      lang="en"
+      className={`${publicSans.variable} ${dmSans.variable} ${geist.variable} dark h-full`}
+    >
       <body className="antialiased min-h-screen flex flex-col">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:text-background"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:text-cta-fg"
         >
           Skip to main content
         </a>
-        <Header />
         {children}
-        <Footer />
       </body>
     </html>
   );

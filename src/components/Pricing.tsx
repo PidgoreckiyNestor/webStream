@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Check } from "lucide-react";
+import { sectionKicker } from "@/components/mv/chrome";
 
 const plans = [
   {
@@ -39,17 +40,139 @@ const plans = [
   },
 ];
 
-export function Pricing() {
+const mindvaultPlans = [
+  {
+    name: "Trial",
+    price: "30 min",
+    period: "",
+    blurb: "Put the hoop on. See if the stream is real.",
+    href: "/download",
+    cta: "Download",
+    popular: false,
+    ghost: true,
+    features: ["30 minutes live", "Contact quality", "Bands on the live view"],
+  },
+  {
+    name: "Plus",
+    price: "$19",
+    period: "/mo",
+    blurb: "Keep the session. Analyse it after.",
+    href: "/signup?plan=plus",
+    cta: "Get Plus",
+    popular: false,
+    ghost: false,
+    features: ["Unlimited live", "Local recording", "Replay and inspect the session"],
+  },
+  {
+    name: "Lab",
+    price: "$49",
+    period: "/mo",
+    blurb: "Pipe the stream. Mark the events.",
+    href: "/signup?plan=lab",
+    cta: "Get Lab",
+    popular: true,
+    ghost: false,
+    features: ["Everything in Plus", "LSL and OSC", "HTTP API", "Event markers"],
+  },
+  {
+    name: "Research",
+    price: "$99",
+    period: "/mo",
+    blurb: "A cleaner trace when the write-up needs it.",
+    href: "/signup?plan=research",
+    cta: "Get Research",
+    popular: false,
+    ghost: false,
+    features: ["Everything in Lab", "Signal filters"],
+  },
+] as const;
+
+function planCardClass(plan: { ghost: boolean }) {
+  if (plan.ghost) {
+    return "flex h-full flex-col rounded-md border border-dashed border-white/15 bg-transparent p-6";
+  }
+  return "flex h-full flex-col rounded-md border border-white/10 bg-white/[0.02] p-6";
+}
+
+function PlanBody({ plan }: { plan: (typeof mindvaultPlans)[number] }) {
+  return (
+    <>
+      <h3 className="text-xl font-medium tracking-tight text-white">
+        {plan.name}
+        {plan.popular ? <span className="sr-only">, recommended</span> : null}
+      </h3>
+      <div className="mt-5 flex items-baseline gap-1">
+        <span className="text-4xl font-medium tracking-tight text-white">{plan.price}</span>
+        {plan.period ? <span className="text-sm text-white/40">{plan.period}</span> : null}
+      </div>
+      <p className="mt-2 text-[15px] leading-relaxed text-white/45">{plan.blurb}</p>
+      <ul role="list" className="mt-6 flex-1 space-y-2.5 border-t border-white/10 pt-6">
+        {plan.features.map((feature) => (
+          <li key={feature} className="text-sm text-white/55">
+            {feature}
+          </li>
+        ))}
+      </ul>
+      <Link
+        href={plan.href}
+        className={
+          plan.popular
+            ? "mt-8 inline-flex h-10 w-full cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium text-black transition-colors duration-150 hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            : "mt-8 inline-flex h-10 w-full cursor-pointer items-center justify-center rounded-md border border-white/15 text-sm font-medium text-white/90 transition-colors duration-150 hover:border-white/25 hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/25"
+        }
+      >
+        {plan.cta}
+      </Link>
+    </>
+  );
+}
+
+function MindVaultPricing() {
+  return (
+    <section className="py-20 sm:py-28" data-mv-reveal>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div id="pricing" className="max-w-2xl scroll-mt-[5.25rem]" data-mv-fade>
+          <p className={sectionKicker}>Plans</p>
+          <h2 className="mt-4 text-4xl font-medium tracking-tight text-white sm:text-5xl">
+            Thirty minutes on the desk. Then pick a plan.
+          </h2>
+          <p className="mt-4 text-lg text-white/50">
+            Connect Muse and watch the live view. Analysis, live-out, and filters sit on a plan.
+          </p>
+        </div>
+
+        <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          {mindvaultPlans.map((plan) => (
+            <div
+              key={plan.name}
+              data-mv-fade
+              className={plan.popular ? "plan-glow flex h-full flex-col rounded-md p-6" : planCardClass(plan)}
+            >
+              <PlanBody plan={plan} />
+            </div>
+          ))}
+        </div>
+        <p className="mt-8 text-[13px] text-white/35">All plans: TP9 AF7 AF8 TP10 · 256 Hz</p>
+      </div>
+    </section>
+  );
+}
+
+export function Pricing({ product = "Metrics®", quiet = false }: { product?: string; quiet?: boolean }) {
+  if (quiet) {
+    return <MindVaultPricing />;
+  }
+
   return (
     <section id="pricing" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <span className="inline-flex items-center rounded-full bg-white/5 px-4 py-1.5 text-sm font-medium text-accent border border-white/10">
+          <span className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm font-medium text-accent">
             Plans for every use case
           </span>
           <h2 className="mt-6 text-4xl font-medium tracking-normal text-white sm:text-5xl">Pricing</h2>
-          <p className="mt-4 text-lg text-white/60 max-w-2xl mx-auto">
-            Choose the plan that fits your research needs. All plans include access to the Metrics® desktop app.
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-white/60">
+            Choose the plan that fits your research needs. All plans include access to the {product} desktop app.
           </p>
         </div>
         <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-3">
@@ -58,8 +181,8 @@ export function Pricing() {
               key={plan.name}
               className={
                 plan.popular
-                  ? "relative rounded-2xl border p-8 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 flex flex-col border-accent/30 bg-white/[0.03] hover:border-accent/50 hover:bg-white/[0.05] shadow-lg shadow-accent/5 hover:shadow-xl hover:shadow-accent/10"
-                  : "relative rounded-2xl border p-8 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 flex flex-col border-white/10 bg-white/[0.02] hover:border-white/20 hover:bg-white/[0.04]"
+                  ? "relative flex flex-col rounded-xl border border-accent/30 bg-white/[0.03] p-8 transition-colors duration-200 hover:border-accent/50 hover:bg-white/[0.05]"
+                  : "relative flex flex-col rounded-xl border border-white/10 bg-white/[0.02] p-8 transition-colors duration-200 hover:border-white/20 hover:bg-white/[0.04]"
               }
             >
               {plan.popular ? (
@@ -88,8 +211,8 @@ export function Pricing() {
                 <span
                   className={
                     plan.popular
-                      ? "inline-flex items-center justify-center font-medium cursor-pointer h-11 rounded-md px-8 text-base w-full transition-all duration-300 bg-accent text-black hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/20 hover:-translate-y-0.5"
-                      : "inline-flex items-center justify-center font-medium cursor-pointer h-11 rounded-md px-8 text-base w-full transition-all duration-300 bg-white/10 text-white hover:bg-white/20 hover:-translate-y-0.5 hover:shadow-lg"
+                      ? "inline-flex h-10 w-full cursor-pointer items-center justify-center rounded-md bg-white px-8 text-sm font-medium text-black transition-colors duration-150 hover:bg-white/90"
+                      : "inline-flex h-10 w-full cursor-pointer items-center justify-center rounded-md border border-white/15 bg-transparent px-8 text-sm font-medium text-white/90 transition-colors duration-150 hover:border-white/25 hover:bg-white/[0.06]"
                   }
                 >
                   Get Started

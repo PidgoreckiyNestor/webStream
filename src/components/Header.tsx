@@ -18,7 +18,7 @@ export function Header() {
       <div className="absolute inset-0 h-32 bg-gradient-to-b from-black via-black/95 via-70% to-transparent pointer-events-none" />
       <nav className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6" aria-label="Main navigation">
         <div className="relative flex items-center justify-between">
-          <Link href="/" className="flex-shrink-0 group z-10" aria-label="Petal Technology home">
+          <Link href="/original" className="flex-shrink-0 group z-10" aria-label="Petal Technology home">
             <img
               src="/images/logo-petal.svg"
               alt="Petal Technology"
@@ -64,7 +64,7 @@ export function Header() {
             </Link>
             <Link
               href="/#pricing"
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background bg-accent text-background hover:bg-accent-hover active:bg-accent-hover/90 h-9 rounded-md px-3"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background bg-accent text-cta-fg hover:bg-accent-hover active:bg-accent-hover/90 h-9 rounded-md px-3"
             >
               Get Started
             </Link>
@@ -101,7 +101,7 @@ export function Header() {
               </Link>
               <Link
                 href="/#pricing"
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg bg-accent text-background hover:bg-accent-hover h-9 rounded-md px-3 w-full"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg bg-accent text-cta-fg hover:bg-accent-hover h-9 rounded-md px-3 w-full"
                 onClick={() => setOpen(false)}
               >
                 Get Started

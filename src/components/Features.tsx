@@ -33,15 +33,19 @@ const features = [
   },
 ];
 
-export function Features() {
+export function Features({ quiet = false }: { quiet?: boolean }) {
   return (
     <section id="features" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <span className="inline-flex items-center rounded-full bg-white/5 px-4 py-1.5 text-sm font-medium text-accent border border-white/10">
-            Features
-          </span>
-          <h2 className="mt-6 text-4xl font-medium tracking-normal text-white sm:text-5xl">
+          {quiet ? (
+            <p className="text-[13px] font-medium tracking-wide text-white/40">Features</p>
+          ) : (
+            <span className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm font-medium text-accent">
+              Features
+            </span>
+          )}
+          <h2 className={`text-4xl font-medium text-white sm:text-5xl ${quiet ? "mt-4 tracking-tight" : "mt-6 tracking-normal"}`}>
             Powerful features for EEG workflows
           </h2>
           <p className="mt-4 text-lg text-white/50 max-w-2xl mx-auto">
@@ -55,7 +59,7 @@ export function Features() {
             return (
               <div
                 key={feature.title}
-                className="group relative rounded-2xl border border-white/10 bg-white/[0.02] p-6 hover:bg-white/[0.05] hover:border-white/20 transition-all duration-300"
+                className="group relative rounded-xl border border-white/10 bg-white/[0.02] p-6 transition-colors duration-200 hover:border-white/20 hover:bg-white/[0.04]"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent group-hover:bg-accent/15 transition-colors">

@@ -36,7 +36,7 @@ export function Hero() {
             <div className="mt-8">
               <a
                 href="#pricing"
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background bg-accent text-background hover:bg-accent-hover active:bg-accent-hover/90 h-12 rounded-lg px-10 text-lg"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background bg-accent text-cta-fg hover:bg-accent-hover active:bg-accent-hover/90 h-12 rounded-lg px-10 text-lg"
               >
                 Select a Plan
               </a>
