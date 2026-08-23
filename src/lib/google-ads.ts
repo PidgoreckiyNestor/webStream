@@ -3,8 +3,10 @@ const DEFAULT_ADS_ID = "AW-18405823566";
 export const GOOGLE_ADS_ID =
   process.env.NEXT_PUBLIC_GOOGLE_ADS_ID || DEFAULT_ADS_ID;
 
+const DEFAULT_CONVERSION_LABEL = "1U8wCM76seYcEM6oyshE";
+
 export const GOOGLE_ADS_CONVERSION_LABEL =
-  process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL || "";
+  process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL || DEFAULT_CONVERSION_LABEL;
 
 export function isGoogleAdsId(id: string): boolean {
   return /^AW-\d+$/.test(id);
