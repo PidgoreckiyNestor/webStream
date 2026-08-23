@@ -65,7 +65,7 @@ export function MvHeader() {
             Contact
           </button>
           <WaitlistOpen intent="lab" className={btnSolid}>
-            Join beta
+            Download
           </WaitlistOpen>
         </div>
       </nav>
@@ -90,7 +90,7 @@ export function MvHeader() {
                 Contact
               </button>
               <WaitlistOpen intent="lab" className={`${btnSolid} flex-1`} onClick={() => closeMenu()}>
-                Join beta
+                Download
               </WaitlistOpen>
             </div>
           </div>

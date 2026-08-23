@@ -9,7 +9,7 @@ const mindvaultPlans = [
     period: "",
     blurb: "Put the hoop on. See if the stream is real.",
     intent: "trial" as PlanIntent,
-    cta: "Join beta",
+    cta: "Download",
     popular: false,
     ghost: true,
     features: ["30 minutes live", "Contact quality", "Bands on the live view"],
