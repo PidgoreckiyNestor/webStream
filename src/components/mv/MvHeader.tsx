@@ -75,6 +75,7 @@ export function MvHeader() {
       <div
         id="mobile-menu"
         aria-hidden={!open}
+        inert={!open}
         className={`relative overflow-hidden transition-all duration-200 ease-out lg:hidden ${
           open ? "max-h-[480px] opacity-100" : "pointer-events-none max-h-0 opacity-0"
         }`}
