@@ -54,8 +54,6 @@ const mindvaultPlans = [
   },
 ] as const;
 
-const montage = ["TP9", "AF7", "AF8", "TP10"] as const;
-
 function planCardClass(plan: { ghost: boolean }) {
   if (plan.ghost) {
     return "flex h-full flex-col rounded-md border border-dashed border-white/15 bg-transparent p-6";
@@ -124,27 +122,13 @@ export function Pricing() {
           ))}
         </div>
 
-        <div className="mt-10 border-t border-white/10 pt-8 sm:mt-12" data-mv-reveal>
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-0 sm:divide-x sm:divide-white/10">
-            <div data-mv-fade className="sm:pr-10">
-              <p className={sectionKicker}>Who it&apos;s for</p>
-              <p className="mt-3 text-[15px] leading-relaxed text-white">Researchers and practitioners.</p>
-              <p className="mt-1.5 text-[15px] leading-relaxed text-white/55">
-                The experiment, the paper, or the desk in between.
-              </p>
-            </div>
-            <div data-mv-fade className="sm:pl-10">
-              <p className={sectionKicker}>On every plan</p>
-              <p className="mt-3 flex flex-wrap items-center gap-x-3 text-[15px] font-medium tracking-wide text-white">
-                {montage.map((ch, i) => (
-                  <span key={ch} className="flex items-center gap-x-3">
-                    {i > 0 ? <span className="h-3 w-px bg-white/10" aria-hidden="true" /> : null}
-                    {ch}
-                  </span>
-                ))}
-              </p>
-              <p className="mt-1.5 text-[15px] tabular-nums text-white/55">256 Hz EEG</p>
-            </div>
+        <div className="mt-10 max-w-2xl border-t border-white/10 pt-8 sm:mt-12" data-mv-reveal>
+          <div data-mv-fade>
+            <p className={sectionKicker}>Who it&apos;s for</p>
+            <p className="mt-3 text-[15px] leading-relaxed text-white">Researchers and practitioners.</p>
+            <p className="mt-1.5 text-[15px] leading-relaxed text-white/55">
+              The experiment, the paper, or the desk in between.
+            </p>
           </div>
         </div>
       </div>
