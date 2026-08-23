@@ -11,7 +11,7 @@ import {
 } from "react";
 import { joinWaitlist } from "@/app/actions/waitlist";
 import { btnGhost, btnSolid } from "@/components/mv/chrome";
-import { fireWaitlistConversion } from "@/lib/google-ads";
+import { fireWaitlistConversion, readGoogleAdsClick } from "@/lib/google-ads";
 import { PLAN_INTENTS, ROLES, type PlanIntent, type Role } from "@/lib/waitlist";
 
 type OpenOpts = { intent?: PlanIntent | null; os?: string | null };
@@ -76,10 +76,11 @@ const roleLabel: Record<Role, string> = {
 function readUtms() {
   if (typeof window === "undefined") return {};
   const params = new URLSearchParams(window.location.search);
+  const stored = readGoogleAdsClick();
   return {
-    utmSource: params.get("utm_source"),
-    utmMedium: params.get("utm_medium"),
-    utmCampaign: params.get("utm_campaign"),
+    utmSource: params.get("utm_source") || stored?.utmSource || null,
+    utmMedium: params.get("utm_medium") || stored?.utmMedium || null,
+    utmCampaign: params.get("utm_campaign") || stored?.utmCampaign || null,
     referrer: document.referrer || null,
   };
 }
