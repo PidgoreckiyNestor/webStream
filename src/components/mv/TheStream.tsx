@@ -28,7 +28,7 @@ function CompareTable() {
       <p className={sectionKicker} data-mv-fade>
         Compare
       </p>
-      <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-white/45" data-mv-fade>
+      <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-foreground-muted" data-mv-fade>
         The meditation app. The phone raw-data app. The Windows LSL bridge. Then a desk.
       </p>
       <div className="mt-6 overflow-x-auto" data-mv-fade>
@@ -110,7 +110,7 @@ export function TheStream() {
                 <dt className="text-sm text-white/50">{line.label}</dt>
                 <dd className="shrink-0 font-medium tabular-nums tracking-tight text-white">
                   <span className="text-3xl sm:text-4xl">{line.kHz}</span>
-                  <span className="ml-1.5 text-sm text-white/40">{line.unit}</span>
+                  <span className="ml-1.5 text-sm text-foreground-muted">{line.unit}</span>
                 </dd>
               </div>
             ))}

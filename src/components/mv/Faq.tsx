@@ -68,7 +68,7 @@ export function Faq() {
                     } transition-[grid-template-rows] duration-300 ease-out`}
                   >
                     <div className="overflow-hidden">
-                      <p className="pb-5 max-w-xl text-[15px] leading-relaxed text-white/45">{item.a}</p>
+                      <p className="pb-5 max-w-xl text-[15px] leading-relaxed text-foreground-muted">{item.a}</p>
                     </div>
                   </div>
                 </div>

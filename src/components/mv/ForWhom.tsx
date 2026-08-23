@@ -19,7 +19,7 @@ function RoleRow() {
       {roles.map((role) => (
         <div key={role.title} data-mv-fade className="md:px-10 first:md:pl-0 last:md:pr-0">
           <h3 className="text-lg font-medium tracking-tight text-white">{role.title}</h3>
-          <p className="mt-2 max-w-sm text-[15px] leading-relaxed text-white/45">{role.body}</p>
+          <p className="mt-2 max-w-sm text-[15px] leading-relaxed text-foreground-muted">{role.body}</p>
         </div>
       ))}
     </div>
