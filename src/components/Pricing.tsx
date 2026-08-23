@@ -40,12 +40,17 @@ const mindvaultPlans = [
     name: "Research",
     price: "$99",
     period: "/mo",
-    blurb: "Notch and bandpass the export when the figure has to be clean.",
+    blurb: "The session is Lab. Research is the file you can defend.",
     intent: "research" as PlanIntent,
     cta: "Get Research",
     popular: false,
     ghost: false,
-    features: ["Everything in Lab", "Notch and bandpass", "Cleaner trace for the figure"],
+    features: [
+      "Everything in Lab",
+      "Adjustable notch and bandpass",
+      "Raw and filtered export",
+      "Filter recipe in the file",
+    ],
   },
 ] as const;
 

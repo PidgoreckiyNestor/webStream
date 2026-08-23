@@ -18,8 +18,8 @@ Desktop app for Muse 2, Muse S, and Muse S Athena. EEG at 256 Hz (TP9, AF7, AF8,
 
 ## Research
 - Price: $99/month
-- Job: notch and bandpass the export when the figure has to be clean
-- Features: everything in Lab, notch and bandpass, cleaner trace for the figure
+- Job: the file you can defend
+- Features: everything in Lab, adjustable notch and bandpass, raw and filtered export, filter recipe in the file
 
 Built for researchers and practitioners. All plans: TP9 AF7 AF8 TP10 at 256 Hz.
 

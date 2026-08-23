@@ -20,7 +20,7 @@ ${PRODUCT_DEFINITION}
 - Free: 30 minutes live
 - Base: $19/mo — unlimited live, local recording, replay
 - Lab: $49/mo — LSL, OSC, HTTP API, event markers
-- Research: $99/mo — notch and bandpass when the figure has to be clean
+- Research: $99/mo — adjustable notch and bandpass, raw and filtered export, filter recipe in the file
 
 ## FAQ
 ${faq}
