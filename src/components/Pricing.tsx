@@ -122,11 +122,13 @@ export function Pricing() {
           ))}
         </div>
 
-        <div className="mt-10 max-w-2xl border-t border-white/10 pt-8 sm:mt-12" data-mv-reveal>
-          <div data-mv-fade>
+        <div className="mt-12 border-t border-white/10 pt-10 sm:mt-16 sm:pt-12" data-mv-reveal>
+          <div className="max-w-3xl" data-mv-fade>
             <p className={sectionKicker}>Who it&apos;s for</p>
-            <p className="mt-3 text-[15px] leading-relaxed text-white">Researchers and practitioners.</p>
-            <p className="mt-1.5 text-[15px] leading-relaxed text-white/55">
+            <h2 className="mt-4 text-3xl font-medium tracking-tight text-white sm:text-4xl">
+              Researchers and practitioners.
+            </h2>
+            <p className="mt-3 text-[15px] leading-relaxed text-white/55 sm:text-lg">
               The experiment, the paper, or the desk in between.
             </p>
           </div>
