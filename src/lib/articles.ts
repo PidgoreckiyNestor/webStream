@@ -23,7 +23,7 @@ export const articles: Article[] = [
       {
         heading: "LSL without a second Windows helper",
         paragraphs: [
-          "Live view, contact quality, local recording, and CSV or EDF sit on Free and Base. Lab ($49/month) adds LSL, OSC, an HTTP API, and event markers on the same session — including Athena.",
+          "Free is 30 minutes live and contact quality. Base adds unlimited live, local recording, and CSV or EDF. Lab ($49/month) adds LSL, OSC, an HTTP API, and event markers on the same session — including Athena.",
           "That is not a public installer yet. Lab beta is a waitlist: pick a plan, leave an email. We write when builds open. BlueMuse stays the right pick if you need a Windows LSL stream today.",
         ],
       },
