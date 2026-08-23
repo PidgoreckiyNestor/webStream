@@ -1,8 +1,11 @@
 "use server";
 
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { Resend } from "resend";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { labBetaJoinEmail, LOGO_CONTENT_ID } from "@/lib/email/lab-beta-join";
 import { captureServerEvent } from "@/lib/posthog/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { isPlanIntent, isRole, parseEmail, type WaitlistInput } from "@/lib/waitlist";
 
 export type JoinWaitlistResult =
@@ -61,19 +64,34 @@ async function sendJoinEmail(email: string) {
 
   try {
     const resend = new Resend(apiKey);
+    const letter = labBetaJoinEmail();
+    const logo = await readLogoPng();
     await resend.emails.send({
       from,
       to: email,
-      subject: "You're on the MindVault Lab beta list",
-      text: [
-        "You're on the list for the Lab beta — LSL, OSC, API, and markers on the desk.",
-        "",
-        "We'll write when it opens.",
-        "",
-        "— MindVault",
-      ].join("\n"),
+      subject: letter.subject,
+      text: letter.text,
+      html: letter.html,
+      attachments: logo
+        ? [
+            {
+              filename: "logo-mindvault-white.png",
+              content: logo,
+              contentType: "image/png",
+              contentId: LOGO_CONTENT_ID,
+            },
+          ]
+        : undefined,
     });
   } catch (err) {
     console.error("waitlist email failed", err);
+  }
+}
+
+async function readLogoPng(): Promise<Buffer | null> {
+  try {
+    return await readFile(join(process.cwd(), "public/images/logo-mindvault-white.png"));
+  } catch {
+    return null;
   }
 }
