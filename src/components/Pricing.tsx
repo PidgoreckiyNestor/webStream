@@ -1,5 +1,6 @@
-import Link from "next/link";
 import { sectionKicker } from "@/components/mv/chrome";
+import { WaitlistOpen } from "@/components/mv/Waitlist";
+import type { PlanIntent } from "@/lib/waitlist";
 
 const mindvaultPlans = [
   {
@@ -7,8 +8,8 @@ const mindvaultPlans = [
     price: "30 min",
     period: "",
     blurb: "Put the hoop on. See if the stream is real.",
-    href: "/download",
-    cta: "Download",
+    intent: "trial" as PlanIntent,
+    cta: "Join beta",
     popular: false,
     ghost: true,
     features: ["30 minutes live", "Contact quality", "Bands on the live view"],
@@ -18,7 +19,7 @@ const mindvaultPlans = [
     price: "$19",
     period: "/mo",
     blurb: "Keep the session. Analyse it after.",
-    href: "/signup?plan=plus",
+    intent: "plus" as PlanIntent,
     cta: "Get Plus",
     popular: false,
     ghost: false,
@@ -29,7 +30,7 @@ const mindvaultPlans = [
     price: "$49",
     period: "/mo",
     blurb: "Pipe the stream. Mark the events.",
-    href: "/signup?plan=lab",
+    intent: "lab" as PlanIntent,
     cta: "Get Lab",
     popular: true,
     ghost: false,
@@ -40,7 +41,7 @@ const mindvaultPlans = [
     price: "$99",
     period: "/mo",
     blurb: "A cleaner trace when the write-up needs it.",
-    href: "/signup?plan=research",
+    intent: "research" as PlanIntent,
     cta: "Get Research",
     popular: false,
     ghost: false,
@@ -74,8 +75,8 @@ function PlanBody({ plan }: { plan: (typeof mindvaultPlans)[number] }) {
           </li>
         ))}
       </ul>
-      <Link
-        href={plan.href}
+      <WaitlistOpen
+        intent={plan.intent}
         className={
           plan.popular
             ? "mt-8 inline-flex h-10 w-full cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium text-black transition-colors duration-150 hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
@@ -83,7 +84,7 @@ function PlanBody({ plan }: { plan: (typeof mindvaultPlans)[number] }) {
         }
       >
         {plan.cta}
-      </Link>
+      </WaitlistOpen>
     </>
   );
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans, Geist, Public_Sans } from "next/font/google";
+import { Providers } from "@/components/mv/Providers";
 import "./globals.css";
 
 const publicSans = Public_Sans({
@@ -48,7 +49,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to main content
         </a>
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
