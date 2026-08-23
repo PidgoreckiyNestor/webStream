@@ -1,44 +1,5 @@
 import Link from "next/link";
-import { Check } from "lucide-react";
 import { sectionKicker } from "@/components/mv/chrome";
-
-const plans = [
-  {
-    name: "Basic",
-    price: "$14.99",
-    blurb: "For individual hobbyists and tinkerers",
-    href: "/signup?plan=basic",
-    popular: false,
-    features: ["Real-Time EEG Visualization", "OSC/LSL/Webhook Streaming"],
-  },
-  {
-    name: "Standard",
-    price: "$39.99",
-    blurb: "For researchers and developers needing data logging and API access",
-    href: "/signup?plan=standard",
-    popular: true,
-    features: [
-      "Real-Time EEG Visualization",
-      "OSC/LSL/Webhook Streaming",
-      "CSV Data Export",
-      "Developer API Access",
-    ],
-  },
-  {
-    name: "Advanced",
-    price: "$79.99",
-    blurb: "For advanced research & development",
-    href: "/signup?plan=advanced",
-    popular: false,
-    features: [
-      "Real-Time EEG Visualization",
-      "OSC/LSL/Webhook Streaming",
-      "CSV Data Export",
-      "Developer API Access",
-      "Signal Filtering",
-    ],
-  },
-];
 
 const mindvaultPlans = [
   {
@@ -127,7 +88,7 @@ function PlanBody({ plan }: { plan: (typeof mindvaultPlans)[number] }) {
   );
 }
 
-function MindVaultPricing() {
+export function Pricing() {
   return (
     <section className="py-20 sm:py-28" data-mv-reveal>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -153,74 +114,6 @@ function MindVaultPricing() {
           ))}
         </div>
         <p className="mt-8 text-[13px] text-white/35">All plans: TP9 AF7 AF8 TP10 · 256 Hz</p>
-      </div>
-    </section>
-  );
-}
-
-export function Pricing({ product = "Metrics®", quiet = false }: { product?: string; quiet?: boolean }) {
-  if (quiet) {
-    return <MindVaultPricing />;
-  }
-
-  return (
-    <section id="pricing" className="py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <span className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm font-medium text-accent">
-            Plans for every use case
-          </span>
-          <h2 className="mt-6 text-4xl font-medium tracking-normal text-white sm:text-5xl">Pricing</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-white/60">
-            Choose the plan that fits your research needs. All plans include access to the {product} desktop app.
-          </p>
-        </div>
-        <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-3">
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className={
-                plan.popular
-                  ? "relative flex flex-col rounded-xl border border-accent/30 bg-white/[0.03] p-8 transition-colors duration-200 hover:border-accent/50 hover:bg-white/[0.05]"
-                  : "relative flex flex-col rounded-xl border border-white/10 bg-white/[0.02] p-8 transition-colors duration-200 hover:border-white/20 hover:bg-white/[0.04]"
-              }
-            >
-              {plan.popular ? (
-                <span className="absolute -top-3 right-6 inline-flex items-center rounded-full bg-accent/20 px-3 py-1 text-xs font-semibold text-accent border border-accent/30">
-                  Most Popular
-                </span>
-              ) : null}
-              <h3 className="text-lg font-semibold text-white">{plan.name}</h3>
-              <div className="mt-4 flex items-baseline">
-                <span className="text-5xl font-medium text-white">{plan.price}</span>
-                <span className="ml-1 text-white/50">/month</span>
-              </div>
-              <p className="mt-2 text-sm text-white/50">{plan.blurb}</p>
-              <div className="mt-6 pt-6 border-t border-white/10 flex-1">
-                <p className="text-sm font-medium text-white/40 mb-4">What&apos;s included:</p>
-                <ul className="space-y-3">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-3">
-                      <Check className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" aria-hidden="true" />
-                      <span className="text-sm text-white/60">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <Link href={plan.href} className="block mt-8">
-                <span
-                  className={
-                    plan.popular
-                      ? "inline-flex h-10 w-full cursor-pointer items-center justify-center rounded-md bg-white px-8 text-sm font-medium text-black transition-colors duration-150 hover:bg-white/90"
-                      : "inline-flex h-10 w-full cursor-pointer items-center justify-center rounded-md border border-white/15 bg-transparent px-8 text-sm font-medium text-white/90 transition-colors duration-150 hover:border-white/25 hover:bg-white/[0.06]"
-                  }
-                >
-                  Get Started
-                </span>
-              </Link>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );

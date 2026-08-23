@@ -51,7 +51,7 @@ export function TheStream() {
           </dl>
         </div>
 
-        <ForWhom compact />
+        <ForWhom />
       </div>
     </section>
   );

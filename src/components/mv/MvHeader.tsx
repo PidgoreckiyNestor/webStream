@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ExternalLink, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { btnGhost, btnSolid, navText } from "@/components/mv/chrome";
 import { InPageAnchor } from "@/components/mv/InPageAnchor";
 
 const mobileNavLink =
   "flex items-center rounded-md px-3 py-2.5 text-sm font-medium text-white/80 hover:bg-white/[0.06] hover:text-white cursor-pointer";
 
-export function MvHeader({ compact = false }: { compact?: boolean }) {
+export function MvHeader() {
   const [open, setOpen] = useState(false);
 
   function closeMenu() {
@@ -43,22 +43,6 @@ export function MvHeader({ compact = false }: { compact?: boolean }) {
             <InPageAnchor targetId="pricing" className={navText}>
               Pricing
             </InPageAnchor>
-            {compact ? null : (
-              <>
-                <Link href="/contact" className={navText}>
-                  Contact
-                </Link>
-                <a
-                  href="https://docs.petal.tech"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${navText} inline-flex items-center gap-1`}
-                >
-                  Docs
-                  <ExternalLink className="h-3 w-3" aria-hidden="true" />
-                </a>
-              </>
-            )}
           </div>
         </div>
 
@@ -76,25 +60,12 @@ export function MvHeader({ compact = false }: { compact?: boolean }) {
         </div>
 
         <div className="hidden items-center gap-2 lg:flex">
-          {compact ? (
-            <>
-              <button type="button" className={btnGhost}>
-                Contact
-              </button>
-              <InPageAnchor targetId="pricing" className={btnSolid}>
-                Download
-              </InPageAnchor>
-            </>
-          ) : (
-            <>
-              <Link href="/login" className={btnGhost}>
-                Log in
-              </Link>
-              <Link href="#pricing" className={btnSolid}>
-                Get started
-              </Link>
-            </>
-          )}
+          <button type="button" className={btnGhost}>
+            Contact
+          </button>
+          <InPageAnchor targetId="pricing" className={btnSolid}>
+            Download
+          </InPageAnchor>
         </div>
       </nav>
 
@@ -113,37 +84,13 @@ export function MvHeader({ compact = false }: { compact?: boolean }) {
             <InPageAnchor targetId="pricing" className={mobileNavLink} onClick={() => closeMenu()}>
               Pricing
             </InPageAnchor>
-            {compact ? null : (
-              <>
-                <Link href="/contact" className={mobileNavLink} onClick={() => closeMenu()}>
-                  Contact
-                </Link>
-                <a href="https://docs.petal.tech" target="_blank" rel="noopener noreferrer" className={mobileNavLink}>
-                  Docs
-                  <ExternalLink className="h-3 w-3" aria-hidden="true" />
-                </a>
-              </>
-            )}
             <div className="mt-3 flex gap-2 border-t border-white/10 pt-3">
-              {compact ? (
-                <>
-                  <button type="button" className={`${btnGhost} flex-1`}>
-                    Contact
-                  </button>
-                  <InPageAnchor targetId="pricing" className={`${btnSolid} flex-1`} onClick={() => closeMenu()}>
-                    Download
-                  </InPageAnchor>
-                </>
-              ) : (
-                <>
-                  <Link href="/login" className={`${btnGhost} flex-1`} onClick={() => closeMenu()}>
-                    Log in
-                  </Link>
-                  <Link href="#pricing" className={`${btnSolid} flex-1`} onClick={() => closeMenu()}>
-                    Get started
-                  </Link>
-                </>
-              )}
+              <button type="button" className={`${btnGhost} flex-1`}>
+                Contact
+              </button>
+              <InPageAnchor targetId="pricing" className={`${btnSolid} flex-1`} onClick={() => closeMenu()}>
+                Download
+              </InPageAnchor>
             </div>
           </div>
         </div>

@@ -22,31 +22,16 @@ const geist = Geist({
 
 export const metadata: Metadata = {
   metadataBase: new URL("http://localhost:3000"),
-  title: "Petal Technology - EEG & Biometric Data Streaming Software",
+  title: "MindVault — Muse EEG on your computer",
   description:
-    "Stream brainwave data from Muse headsets with Metrics software. Real-time EEG visualization, data recording, and integration tools for researchers and developers.",
-  authors: [{ name: "Petal Technology LLC" }],
-  keywords: [
-    "EEG",
-    "Muse",
-    "brainwave",
-    "biometric",
-    "neuroscience",
-    "brain-computer interface",
-    "BCI",
-    "Metrics",
-    "data streaming",
-    "research software",
-  ],
+    "Desktop app for Muse 2 and Muse S. Live stream, local recording, LSL, OSC, and CSV — on a desk.",
   robots: { index: false, follow: false },
   openGraph: {
-    title: "Petal Technology - EEG & Biometric Data Streaming Software",
-    description:
-      "Stream brainwave data from Muse headsets with Metrics software. Real-time EEG visualization, data recording, and integration tools.",
-    siteName: "Petal Technology",
+    title: "MindVault — Muse EEG on your computer",
+    description: "Desktop app for Muse 2 and Muse S. Live stream, local recording, and live-out.",
+    siteName: "MindVault",
     locale: "en_US",
     type: "website",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Petal Technology - Metrics Software" }],
   },
 };
 

@@ -1,5 +1,3 @@
-import { sectionKicker } from "@/components/mv/chrome";
-
 const roles = [
   {
     title: "Research",
@@ -28,28 +26,10 @@ function RoleRow() {
   );
 }
 
-export function ForWhom({ compact = false }: { compact?: boolean }) {
-  if (compact) {
-    return (
-      <div className="mt-16" data-mv-reveal>
-        <RoleRow />
-      </div>
-    );
-  }
-
+export function ForWhom() {
   return (
-    <section className="py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl">
-          <p className={sectionKicker}>Who it’s for</p>
-          <h2 className="mt-4 text-4xl font-medium tracking-tight text-white sm:text-5xl">
-            Same desk. Three jobs.
-          </h2>
-        </div>
-        <div className="mt-14">
-          <RoleRow />
-        </div>
-      </div>
-    </section>
+    <div className="mt-16" data-mv-reveal>
+      <RoleRow />
+    </div>
   );
 }

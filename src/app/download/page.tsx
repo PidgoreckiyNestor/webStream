@@ -12,7 +12,7 @@ const platforms = [
 export default function DownloadPage() {
   return (
     <div className="theme-v2 flex min-h-screen flex-col">
-      <MvHeader compact />
+      <MvHeader />
       <main id="main-content" className="flex-1 pt-28 pb-24">
         <div className="mx-auto max-w-xl px-4 text-center sm:px-6">
           <p className="text-[13px] font-medium tracking-wide text-white/40">Desktop app</p>
@@ -33,16 +33,16 @@ export default function DownloadPage() {
           </ul>
           <p className="mt-8 text-sm text-white/40">Study mock — builds are not live yet.</p>
           <div className="mt-8 flex items-center justify-center gap-2">
-            <Link href="/v5#pricing" className={btnSolid}>
+            <Link href="/#pricing" className={btnSolid}>
               See plans
             </Link>
-            <Link href="/v5" className={btnGhost}>
+            <Link href="/" className={btnGhost}>
               Back
             </Link>
           </div>
         </div>
       </main>
-      <MvFooter compact />
+      <MvFooter />
     </div>
   );
 }

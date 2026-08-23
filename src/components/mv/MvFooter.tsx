@@ -54,7 +54,7 @@ function CompactColumns() {
         <h3 className={footerHeading}>Licenses</h3>
         <ul role="list" className="mt-4 space-y-3">
           <li>
-            <InPageAnchor targetId="pricing" href="/v5#pricing" className={footerLink}>
+            <InPageAnchor targetId="pricing" className={footerLink}>
               Pricing
             </InPageAnchor>
           </li>
@@ -76,10 +76,9 @@ function CompactColumns() {
   );
 }
 
-export function MvFooter({ compact = false }: { compact?: boolean }) {
-  if (compact) {
-    return (
-      <footer className="relative overflow-hidden border-t border-white/5 bg-background" aria-labelledby="footer-heading">
+export function MvFooter() {
+  return (
+    <footer className="relative overflow-hidden border-t border-white/5 bg-background" aria-labelledby="footer-heading">
         <h2 id="footer-heading" className="sr-only">
           Footer
         </h2>
@@ -99,49 +98,6 @@ export function MvFooter({ compact = false }: { compact?: boolean }) {
           <CompactColumns />
           <p className="text-center text-[13px] text-white/30">© 2026 MindVault. All rights reserved.</p>
         </div>
-      </footer>
-    );
-  }
-
-  return (
-    <footer className="border-t border-white/5 bg-background pb-20" aria-labelledby="footer-heading">
-      <h2 id="footer-heading" className="sr-only">
-        Footer
-      </h2>
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-        <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-          <div className="space-y-4">
-            <Link href="/" className="inline-block" aria-label="MindVault home">
-              <img src="/images/logo-mindvault.svg" alt="MindVault" width={160} height={36} className="h-7 w-auto" />
-            </Link>
-            <p className="text-sm text-white/50 max-w-xs">
-              The real-time neural data toolkit. Process, stream, and analyze biosensor data for any application.
-            </p>
-          </div>
-          <div className="mt-12 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-            <div>
-              <h3 className="text-sm font-semibold text-white">Product</h3>
-              <ul className="mt-4 space-y-3">
-                <li>
-                  <Link href="#pricing" className={footerLink}>
-                    Pricing
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold text-white">Company</h3>
-              <ul className="mt-4 space-y-3">
-                <li>
-                  <Link href="/contact" className={footerLink}>
-                    Contact
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
     </footer>
   );
 }
