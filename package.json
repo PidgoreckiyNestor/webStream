@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test:analytics-brand": "node --test scripts/analytics-brand.test.mjs",
     "test:positioning": "node --test scripts/articles-positioning.test.mjs"
   },
   "dependencies": {

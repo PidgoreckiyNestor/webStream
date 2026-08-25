@@ -37,18 +37,6 @@ export const metadata: Metadata = {
     description,
     images: ["/og-image.png"],
   },
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "48x48" },
-      { url: "/favicon-48.png", sizes: "48x48", type: "image/png" },
-      { url: "/favicon-96.png", sizes: "96x96", type: "image/png" },
-      { url: "/icon.png", sizes: "256x256", type: "image/png" },
-    ],
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180" },
-      { url: "/icon.png", sizes: "256x256" },
-    ],
-  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

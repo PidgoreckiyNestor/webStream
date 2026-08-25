@@ -27,9 +27,14 @@ export function PostHogPageview() {
           capture_pageleave: true,
           capture_performance: { web_vitals: true, network_timing: false },
           autocapture: false,
-          disable_session_recording: true,
+          session_recording: {
+            maskAllInputs: true,
+            recordHeaders: false,
+            recordBody: false,
+          },
           disable_surveys: true,
           person_profiles: "identified_only",
+          respect_dnt: true,
         });
         posthog.capture("$pageview", { $current_url: window.location.href });
       });
